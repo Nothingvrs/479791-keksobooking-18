@@ -20,7 +20,7 @@ var MIN_PRICE = 2000000;
 var MAX_PRICE = 10000000;
 var MIN_Y = 130;
 var MAX_Y = 630;
-var OFFER_AMMOUNTS = 7;
+var OFFERS_AMOUNT = 7;
 var offersData = [];
 var mapOverlay = document.querySelector('.map__pins');
 var map = document.querySelector('.map');
@@ -86,5 +86,5 @@ var getDrawMapPin = function (count) {
   mapOverlay.appendChild(fragment);
 };
 
-createOffersData(OFFER_AMMOUNTS);
-getDrawMapPin(OFFER_AMMOUNTS);
+createOffersData(OFFERS_AMOUNT);
+getDrawMapPin(OFFERS_AMOUNT);
