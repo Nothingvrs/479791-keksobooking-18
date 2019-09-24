@@ -39,10 +39,9 @@ var createRandomObject = function (collection) {
   return newList;
 };
 
-var createMoki = function () {
-  var moki = {author: {
-    avatar: getRandomElement(AVATARS)},
-    offer:
+var getOfferData = function () {
+  return {author: {
+    avatar: getRandomElement(AVATARS)}, offer:
       {title: getRandomElement(TITLES),
         address: getRandomNumber(MIN_X, MAX_X) + ', ' + getRandomNumber(MIN_Y, MAX_Y),
         price: getRandomNumber(MIN_PRICE, MAX_PRICE),
@@ -53,34 +52,35 @@ var createMoki = function () {
         checkout: getRandomElement(CHECKS),
         features: createRandomObject(FEATURES),
         description: getRandomElement(DESCRIPTIONS),
-        photos: createRandomObject(PHOTOS)},
-    location: {x: getRandomNumber(MIN_X, MAX_X), y: getRandomNumber(MIN_Y, MAX_Y)}};
-  return moki;
+        photos: createRandomObject(PHOTOS)}, location: {x: getRandomNumber(MIN_X, MAX_X), y: getRandomNumber(MIN_Y, MAX_Y)}};
 };
 
-var generateMoki = function (count) {
+var createOffersData = function (count) {
   for (var i = 0; i <= count; i++) {
-    mokiData.push(createMoki());
+    mokiData.push(getOfferData());
   } return mokiData;
 };
 
-var renderMapPin = function (collection, count) {
-  var fragment = document.createDocumentFragment();
+var renderMapPin = function (collection, index) {
   var pinTemplate = document.querySelector('#pin')
     .content;
+  var mapPin = pinTemplate.cloneNode(true);
+  var pinImageElement = mapPin.querySelector('img');
+  var pinBody = mapPin.querySelector('.map__pin');
+  pinImageElement.src = collection[index].author.avatar;
+  pinBody.style.left = collection[index].location.x;
+  pinBody.style.top = collection[index].location.y;
+  pinImageElement.alt = collection[index].offer.title;
+  return mapPin;
+};
+
+var getDrawMapPin = function (count) {
+  var fragment = document.createDocumentFragment();
   for (var i = 0; i < count; i++) {
-    var mapPin = pinTemplate.cloneNode(true);
-    var pinImageElement = mapPin.querySelector('img');
-    var pinBody = mapPin.querySelector('.map__pin');
-    pinImageElement.src = mokiData[i].author.avatar;
-    pinBody.style.left = mokiData[i].location.x;
-    pinBody.style.top = mokiData[i].location.y;
-    pinImageElement.alt = mokiData[i].offer.title;
-    fragment.appendChild(mapPin);
+    fragment.appendChild(renderMapPin(mokiData, i));
   }
   mapOverlay.appendChild(fragment);
 };
 
-generateMoki(7);
-renderMapPin(mokiData, 7);
-
+createOffersData(7);
+getDrawMapPin(7);
