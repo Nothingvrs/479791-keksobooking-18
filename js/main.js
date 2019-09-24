@@ -41,7 +41,7 @@ var createRandomObject = function (collection) {
 
 var createMoki = function () {
   var moki = {author: {
-      avatar: getRandomElement(AVATARS)},
+    avatar: getRandomElement(AVATARS)},
     offer:
       {title: getRandomElement(TITLES),
         address: getRandomNumber(MIN_X, MAX_X) + ', ' + getRandomNumber(MIN_Y, MAX_Y),
@@ -55,7 +55,7 @@ var createMoki = function () {
         description: getRandomElement(DESCRIPTIONS),
         photos: createRandomObject(PHOTOS)},
     location: {x: getRandomNumber(MIN_X, MAX_X), y: getRandomNumber(MIN_Y, MAX_Y)}};
-  return moki
+  return moki;
 };
 
 var generateMoki = function (count) {
