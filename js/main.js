@@ -12,7 +12,7 @@ var MIN_ROOMS = 1;
 var MAX_ROOMS = 5;
 var MIN_GUESTS = 1;
 var MAX_GUESTS = 4;
-var PIN_WIDTH = 156;
+var PIN_WIDTH = 65;
 var WINDOW_WIDTH = 1200;
 var MIN_X = PIN_WIDTH / 2;
 var MAX_X = WINDOW_WIDTH - PIN_WIDTH / 2;
@@ -20,8 +20,8 @@ var MIN_PRICE = 2000000;
 var MAX_PRICE = 10000000;
 var MIN_Y = 130;
 var MAX_Y = 630;
+var OFFER_AMMOUNTS = 7;
 var offersData = [];
-var NUMBER_OF_ADS = 7;
 var mapOverlay = document.querySelector('.map__pins');
 var map = document.querySelector('.map');
 map.classList.remove('map--faded');
@@ -86,5 +86,5 @@ var getDrawMapPin = function (count) {
   mapOverlay.appendChild(fragment);
 };
 
-createOffersData(NUMBER_OF_ADS);
-getDrawMapPin(NUMBER_OF_ADS);
+createOffersData(OFFER_AMMOUNTS);
+getDrawMapPin(OFFER_AMMOUNTS);
