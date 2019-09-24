@@ -3,7 +3,8 @@
 var AVATARS = ['img/avatars/user01.png', 'img/avatars/user02.png', 'img/avatars/user03.png', 'img/avatars/user04.png', 'img/avatars/user05.png', 'img/avatars/user06.png', 'img/avatars/user07.png', 'img/avatars/user08.png'];
 var TITLES = ['Сдаю квартиру', 'Продаю квартиру', 'Квартира с ремонтом', 'Квартира в черновой отделке'];
 var TYPES = ['palace', 'flat', 'house', 'bungalo'];
-var CHECKS = ['12:00', '13:00', '14:00'];
+var CHECK_IN = ['12:00', '13:00', '14:00'];
+var CHECK_OUT = ['12:00', '13:00', '14:00'];
 var FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 var DESCRIPTIONS = ['скромная хата', 'дворец короля', 'пентхаус аристократа', 'уютное гнёздышко на 2-их'];
 var PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
@@ -11,13 +12,16 @@ var MIN_ROOMS = 1;
 var MAX_ROOMS = 5;
 var MIN_GUESTS = 1;
 var MAX_GUESTS = 4;
-var MIN_X = 0;
-var MAX_X = 1200;
+var PIN_WIDTH = 156;
+var WINDOW_WIDTH = 1200;
+var MIN_X = PIN_WIDTH / 2;
+var MAX_X = WINDOW_WIDTH - PIN_WIDTH / 2;
 var MIN_PRICE = 2000000;
 var MAX_PRICE = 10000000;
 var MIN_Y = 130;
 var MAX_Y = 630;
-var mokiData = [];
+var offersData = [];
+var NUMBER_OF_ADS = 7;
 var mapOverlay = document.querySelector('.map__pins');
 var map = document.querySelector('.map');
 map.classList.remove('map--faded');
@@ -48,8 +52,8 @@ var getOfferData = function () {
         type: getRandomElement(TYPES),
         rooms: getRandomNumber(MIN_ROOMS, MAX_ROOMS),
         guests: getRandomNumber(MIN_GUESTS, MAX_GUESTS),
-        checkin: getRandomElement(CHECKS),
-        checkout: getRandomElement(CHECKS),
+        checkin: getRandomElement(CHECK_IN),
+        checkout: getRandomElement(CHECK_OUT),
         features: createRandomObject(FEATURES),
         description: getRandomElement(DESCRIPTIONS),
         photos: createRandomObject(PHOTOS)}, location: {x: getRandomNumber(MIN_X, MAX_X), y: getRandomNumber(MIN_Y, MAX_Y)}};
@@ -57,30 +61,30 @@ var getOfferData = function () {
 
 var createOffersData = function (count) {
   for (var i = 0; i <= count; i++) {
-    mokiData.push(getOfferData());
-  } return mokiData;
+    offersData.push(getOfferData());
+  } return offersData;
 };
 
-var renderMapPin = function (collection, index) {
+var renderMapPin = function (pinData) {
   var pinTemplate = document.querySelector('#pin')
     .content;
   var mapPin = pinTemplate.cloneNode(true);
   var pinImageElement = mapPin.querySelector('img');
   var pinBody = mapPin.querySelector('.map__pin');
-  pinImageElement.src = collection[index].author.avatar;
-  pinBody.style.left = collection[index].location.x;
-  pinBody.style.top = collection[index].location.y;
-  pinImageElement.alt = collection[index].offer.title;
+  pinImageElement.src = pinData.author.avatar;
+  pinBody.style.left = pinData.location.x + 'px';
+  pinBody.style.top = pinData.location.y + 'px';
+  pinImageElement.alt = pinData.offer.title;
   return mapPin;
 };
 
 var getDrawMapPin = function (count) {
   var fragment = document.createDocumentFragment();
   for (var i = 0; i < count; i++) {
-    fragment.appendChild(renderMapPin(mokiData, i));
+    fragment.appendChild(renderMapPin(offersData[i], i));
   }
   mapOverlay.appendChild(fragment);
 };
 
-createOffersData(7);
-getDrawMapPin(7);
+createOffersData(NUMBER_OF_ADS);
+getDrawMapPin(NUMBER_OF_ADS);
