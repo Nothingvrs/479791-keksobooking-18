@@ -111,7 +111,7 @@ var setMainPinCoordinate = function () {
   addressInput.value = Math.round(coordinate.left + PIN_HEIGHT / 2) + ', ' + Math.round(coordinate.top + PIN_WIDTH);
 };
 
-var onClickMainPin = function () {
+var onMainPinClick = function () {
   adForm.classList.remove('ad-form--disabled');
   map.classList.remove('map--faded');
   toggleDisabled(false);
@@ -119,7 +119,7 @@ var onClickMainPin = function () {
   getDrawMapPin(OFFERS_AMOUNT);
 };
 
-var onKeyEnterMapPin = function (evt) {
+var onMapPinKeyEnter = function (evt) {
   if (evt.keyCode === ENTER_KEYCODE) {
     adForm.classList.remove('ad-form--disabled');
     map.classList.remove('map--faded');
@@ -129,11 +129,11 @@ var onKeyEnterMapPin = function (evt) {
   }
 };
 
-var onMoveMapPin = function () {
+var onMapPinMove = function () {
   setMainPinCoordinate(mainPin);
 };
 
-var onSubmitClick = function () {
+var onClickSubmit = function () {
   if (capacityInput.value < roomsInput.value) {
     roomsInput.setCustomValidity('Выберете квартиру поменьше');
   } else {
@@ -144,9 +144,9 @@ var onSubmitClick = function () {
     }
   }
 };
-submitButton.addEventListener('click', onSubmitClick);
-mainPin.addEventListener('mousemove', onMoveMapPin);
-mainPin.addEventListener('mousedown', onClickMainPin);
-mainPin.addEventListener('keydown', onKeyEnterMapPin);
+submitButton.addEventListener('click', onClickSubmit);
+mainPin.addEventListener('mousemove', onMapPinMove);
+mainPin.addEventListener('mousedown', onMainPinClick);
+mainPin.addEventListener('keydown', onMapPinKeyEnter);
 adFormDisabled(adForm, fieldsets);
 createOffersData(OFFERS_AMOUNT);
