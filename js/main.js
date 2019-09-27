@@ -34,13 +34,13 @@ var roomsInput = adForm.querySelector('[name = rooms');
 var submitButton = adForm.querySelector('.ad-form__submit');
 
 var fielsetDisabled = function (collection) {
-  for (var i = 0; i < collection.length; i++){
+  for (var i = 0; i < collection.length; i++) {
     collection[i].disabled = true;
   }
 };
 
 var fieldsetUndisabled = function (collection) {
-  for (var i = 0; i <collection.length; i++) {
+  for (var i = 0; i < collection.length; i++) {
     collection[i].disabled = false;
   }
 };
@@ -48,8 +48,6 @@ var fieldsetUndisabled = function (collection) {
 var adFormDisabled = function (form) {
   if (form.classList.contains('ad-form--disabled')) {
     fielsetDisabled(fieldsets);
-  } else {
-
   }
 };
 
@@ -119,11 +117,11 @@ var entryCoordinateClient = function () {
 };
 
 clientMapPin.addEventListener('mousedown', function () {
-    adForm.classList.remove('ad-form--disabled');
-    map.classList.remove('map--faded');
-    fieldsetUndisabled(fieldsets);
-    entryCoordinateClient();
-    getDrawMapPin(OFFERS_AMOUNT);
+  adForm.classList.remove('ad-form--disabled');
+  map.classList.remove('map--faded');
+  fieldsetUndisabled(fieldsets);
+  entryCoordinateClient();
+  getDrawMapPin(OFFERS_AMOUNT);
 });
 
 clientMapPin.addEventListener('mousemove', function () {
@@ -132,15 +130,12 @@ clientMapPin.addEventListener('mousemove', function () {
 
 submitButton.addEventListener('click', function () {
   if (capacityInput.value < roomsInput.value) {
-    roomsInput.setCustomValidity ('Выберете квартиру поменьше');
+    roomsInput.setCustomValidity('Выберете квартиру поменьше');
   }
   if (capacityInput.value > roomsInput.value) {
-    roomsInput.setCustomValidity ('Выберете квартиру побольше');
+    roomsInput.setCustomValidity('Выберете квартиру побольше');
   }
 });
 
 adFormDisabled(adForm, fieldsets);
 createOffersData(OFFERS_AMOUNT);
-
-
-
