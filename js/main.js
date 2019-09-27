@@ -111,7 +111,7 @@ var setMainPinCoordinate = function () {
   addressInput.value = Math.round(coordinate.left + PIN_HEIGHT / 2) + ', ' + Math.round(coordinate.top + PIN_WIDTH);
 };
 
-var enabledMap = function () {
+var onClickMainPin = function () {
   adForm.classList.remove('ad-form--disabled');
   map.classList.remove('map--faded');
   toggleDisabled(false);
@@ -119,39 +119,34 @@ var enabledMap = function () {
   getDrawMapPin(OFFERS_AMOUNT);
 };
 
-var onClickMainPin = function () {
-  mainPin.addEventListener('mousedown', function () {
-    enabledMap();
-  });
-};
-
-var onKeyEnterMapPin = function () {
-  mainPin.addEventListener('mousedown', function (evt) {
-    if (evt.keycode === ENTER_KEYCODE) {
-      enabledMap();
+var onKeyEnterMapPin = function (evt) {
+  if (evt.keyCode === ENTER_KEYCODE) {
+    adForm.classList.remove('ad-form--disabled');
+    map.classList.remove('map--faded');
+    toggleDisabled(false);
+    setMainPinCoordinate();
+    getDrawMapPin(OFFERS_AMOUNT);
   }
-});
-
-var onMovePin = function () {
-  mainPin.addEventListener('mousemove', function () {
-    setMainPinCoordinate(mainPin);
-  });
 };
 
-var onSubmitPress = function () {
-  submitButton.addEventListener('click', function () {
-    if (capacityInput.value < roomsInput.value) {
-      roomsInput.setCustomValidity('Выберете квартиру поменьше');
-    }
+var onMoveMapPin = function () {
+  setMainPinCoordinate(mainPin);
+};
+
+var onSubmitClick = function () {
+  if (capacityInput.value < roomsInput.value) {
+    roomsInput.setCustomValidity('Выберете квартиру поменьше');
+  } else {
     if (capacityInput.value > roomsInput.value) {
       roomsInput.setCustomValidity('Выберете квартиру побольше');
+    } else {
+      roomsInput.setCustomValidity('');
     }
-  });
+  }
 };
-
-adFormDisabled(adForm);
+submitButton.addEventListener('click', onSubmitClick);
+mainPin.addEventListener('mousemove', onMoveMapPin);
+mainPin.addEventListener('mousedown', onClickMainPin);
+mainPin.addEventListener('keydown', onKeyEnterMapPin);
+adFormDisabled(adForm, fieldsets);
 createOffersData(OFFERS_AMOUNT);
-onClickMainPin();
-onKeyEnterMapPin();
-onMovePin();
-onSubmitPress();
