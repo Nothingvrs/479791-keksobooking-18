@@ -108,7 +108,7 @@ var getDrawMapPin = function (count) {
 
 var setMainPinCoordinate = function () {
   var coordinate = mainPin.getBoundingClientRect();
-  addressInput.value = Math.round(coordinate.left + PIN_HEIGHT / 2) + ', ' + Math.round(coordinate.top + PIN_WIDTH);
+  addressInput.value = Math.round(coordinate.left + PIN_WIDTH / 2) + ', ' + Math.round(coordinate.top + PIN_HEIGHT);
 };
 
 var onMainPinClick = function () {
