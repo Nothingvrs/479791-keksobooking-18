@@ -34,9 +34,9 @@ var capacityInput = adForm.querySelector('[name = capacity]');
 var roomsInput = adForm.querySelector('[name = rooms');
 var submitButton = adForm.querySelector('.ad-form__submit');
 
-var toggleDisabled = function (boolean) {
+var toggleDisabled = function (isDisabled) {
   for (var i = 0; i < fieldsets.length; i++) {
-    fieldsets[i].disabled = boolean;
+    fieldsets[i].disabled = isDisabled;
   }
 };
 
