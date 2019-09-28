@@ -32,6 +32,7 @@ var mainPin = document.querySelector('.map__pin--main');
 var addressInput = adForm.querySelector('[name = address]');
 var capacityInput = adForm.querySelector('[name = capacity]');
 var roomsInput = adForm.querySelector('[name = rooms');
+var submit = adForm.querySelector('.ad-form__submit');
 
 var toggleDisabled = function (isDisabled) {
   for (var i = 0; i < fieldsets.length; i++) {
@@ -133,30 +134,25 @@ var onMapPinMove = function () {
 };
 var validateRooms = function () {
   if (roomsInput.value === '100') {
-    for (var i = 0; i < capacityInput.options.length; i++) {
-      if (capacityInput.options[i].value !== '0') {
-        capacityInput.options[i].disabled = true;
-      }
+    if (capacityInput.value !== '0') {
+      capacityInput.setCustomValidity('Эти аппартаменты не для гостей');
+    } else {
+      capacityInput.setCustomValidity('');
     }
-  }
-  for (i = 0; i < roomsInput.options.length; i++) {
-    if (roomsInput.options[i].selected === true) {
-      var rooms = roomsInput.options[i].value;
-      for (i = 0; i < capacityInput.options.length; i++) {
-        if (rooms < capacityInput.options[i].value || capacityInput.options[i].value === '0') {
-          capacityInput[i].disabled = true;
-        }
-      }
+  } else {
+    if (roomsInput.value < capacityInput.value || capacityInput.value === '0') {
+      capacityInput.setCustomValidity('Вам нужна квартира побольше');
+    } else {
+      capacityInput.setCustomValidity('');
     }
   }
 };
 
-var onFormSubmit = function (evt) {
-  evt.preventDefault();
+var onFormSubmit = function () {
+  validateRooms();
 };
 
-roomsInput.addEventListener('change', validateRooms());
-adForm.addEventListener('submit', onFormSubmit);
+submit.addEventListener('click', onFormSubmit);
 mainPin.addEventListener('mousemove', onMapPinMove);
 mainPin.addEventListener('mousedown', onMainPinClick);
 mainPin.addEventListener('keydown', onMapPinKeyEnter);
