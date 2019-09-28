@@ -134,9 +134,9 @@ var onMapPinMove = function () {
 };
 var validateRooms = function () {
   capacityInput.setCustomValidity('');
-  if (roomsInput.value < capacityInput.value && capacityInput.value !== '0' && roomsInput.value !== '100') {
+  if (roomsInput.value < capacityInput.value && capacityInput.value > '0' && roomsInput.value !== '100') {
     capacityInput.setCustomValidity('Вам нужна квартира побольше');
-  } else if (roomsInput.value === '100' && capacityInput.value !== '0') {
+  } else if (roomsInput.value === '100' && capacityInput.value > '0') {
     capacityInput.setCustomValidity('Эти аппартаменты не для гостей');
   } else if (roomsInput.value !== '100' && capacityInput.value === '0') {
     capacityInput.setCustomValidity('Выберите аппартаменты не для гостей');
