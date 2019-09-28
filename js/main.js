@@ -133,17 +133,13 @@ var onMapPinMove = function () {
   setMainPinCoordinate(mainPin);
 };
 var validateRooms = function () {
+  capacityInput.setCustomValidity('');
+  if (roomsInput.value < capacityInput.value || capacityInput.value === '0') {
+    capacityInput.setCustomValidity('Вам нужна квартира побольше');
+  }
   if (roomsInput.value === '100') {
     if (capacityInput.value !== '0') {
       capacityInput.setCustomValidity('Эти аппартаменты не для гостей');
-    } else {
-      capacityInput.setCustomValidity('');
-    }
-  } else {
-    if (roomsInput.value < capacityInput.value || capacityInput.value === '0') {
-      capacityInput.setCustomValidity('Вам нужна квартира побольше');
-    } else {
-      capacityInput.setCustomValidity('');
     }
   }
 };
