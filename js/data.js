@@ -16,11 +16,11 @@
   var MAX_PRICE = 10000000;
   window.PIN_WIDTH = 65;
   var WINDOW_WIDTH = 1200;
-  window.OFFERS_AMOUNT = 7;
-  window.MIN_X = window.PIN_WIDTH / 2;
-  window.MAX_X = WINDOW_WIDTH - window.PIN_WIDTH / 2;
-  window.MIN_Y = 130;
-  window.MAX_Y = 630;
+  var OFFERS_AMOUNT = 7;
+  var MIN_X = window.PIN_WIDTH / 2;
+  var MAX_X = WINDOW_WIDTH - window.PIN_WIDTH / 2;
+  var MIN_Y = 130;
+  var MAX_Y = 630;
   window.offersData = [];
 
   var getRandomElement = function (arr) {
@@ -44,7 +44,7 @@
     return {author: {
       avatar: getRandomElement(AVATARS)}, offer:
       {title: getRandomElement(TITLES),
-        address: getRandomNumber(window.MIN_X, window.MAX_X) + ', ' + getRandomNumber(window.MIN_Y, window.MAX_Y),
+        address: getRandomNumber(MIN_X, MAX_X) + ', ' + getRandomNumber(MIN_Y, MAX_Y),
         price: getRandomNumber(MIN_PRICE, MAX_PRICE),
         type: getRandomElement(TYPES),
         rooms: getRandomNumber(MIN_ROOMS, MAX_ROOMS),
@@ -53,7 +53,7 @@
         checkout: getRandomElement(CHECK_OUT),
         features: createRandomObject(FEATURES),
         description: getRandomElement(DESCRIPTIONS),
-        photos: createRandomObject(PHOTOS)}, location: {x: getRandomNumber(window.MIN_X, window.MAX_X), y: getRandomNumber(window.MIN_Y, window.MAX_Y)}};
+        photos: createRandomObject(PHOTOS)}, location: {x: getRandomNumber(MIN_X, MAX_X), y: getRandomNumber(MIN_Y, MAX_Y)}};
   };
 
   var createOffersData = function (count) {
@@ -62,5 +62,5 @@
     }
   };
 
-  createOffersData(window.OFFERS_AMOUNT);
+  createOffersData(OFFERS_AMOUNT);
 })();

@@ -15,9 +15,9 @@
     return mapPin;
   };
 
-  window.getDrawMapPin = function (count) {
+  window.getDrawMapPin = function () {
     var fragment = document.createDocumentFragment();
-    for (var i = 0; i < count; i++) {
+    for (var i = 0; i < window.offersData.length; i++) {
       fragment.appendChild(renderMapPin(window.offersData[i], i));
     }
 

@@ -24,7 +24,7 @@
       map.classList.remove('map--faded');
       window.toggleDisabled(false);
       setMainPinCoordinate();
-      window.getDrawMapPin(window.OFFERS_AMOUNT);
+      window.getDrawMapPin();
     }
   };
 
