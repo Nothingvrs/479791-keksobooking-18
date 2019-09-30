@@ -14,6 +14,11 @@
   var MAX_GUESTS = 4;
   var MIN_PRICE = 2000000;
   var MAX_PRICE = 10000000;
+  window.PIN_WIDTH = 65;
+  var WINDOW_WIDTH = 1200;
+  window.OFFERS_AMOUNT = 7;
+  window.MIN_X = window.PIN_WIDTH / 2;
+  window.MAX_X = WINDOW_WIDTH - window.PIN_WIDTH / 2;
   window.MIN_Y = 130;
   window.MAX_Y = 630;
   window.offersData = [];
