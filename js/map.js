@@ -7,7 +7,7 @@
 
   var setMainPinCoordinate = function () {
     var coordinate = mainPin.getBoundingClientRect();
-    window.form.coordinate.value = Math.round(coordinate.left + window.data.pinWidth / 2) + ', ' + Math.round(coordinate.top + PIN_HEIGHT);
+    window.form.adressInput.value = Math.round(coordinate.left + window.data.pinWidth / 2) + ', ' + Math.round(coordinate.top + PIN_HEIGHT);
   };
 
   var onMainPinClick = function () {
@@ -15,7 +15,7 @@
     map.classList.remove('map--faded');
     window.form.toggleDisabled(false);
     setMainPinCoordinate();
-    window.pin.getDraw();
+    window.pin.render();
   };
 
   var onMapPinKeyEnter = function (evt) {
@@ -24,7 +24,7 @@
       map.classList.remove('map--faded');
       window.form.toggleDisabled(false);
       setMainPinCoordinate();
-      window.pin.getDraw();
+      window.pin.render();
     }
   };
 

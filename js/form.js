@@ -39,6 +39,6 @@
 
   window.form = {};
   window.form.ads = adForm;
-  window.form.coordinate = addressInput;
-  window.form.toggleDisabled = toggleDisabled();
+  window.form.adressInput = addressInput;
+  window.form.toggleDisabled = toggleDisabled;
 })();
