@@ -54,7 +54,7 @@
   var createOffersData = function (count) {
     for (var i = 0; i <= count; i++) {
       window.offersData.push(getOfferData());
-    } return window.offersData;
+    }
   };
   createOffersData(window.OFFERS_AMOUNT);
 })();
