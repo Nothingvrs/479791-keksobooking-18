@@ -66,6 +66,7 @@ var createRandomObject = function (collection) {
 var getOfferData = function () {
   return {author: {
     avatar: getRandomElement(AVATARS)}, offer:
+
   {title: getRandomElement(TITLES),
     address: getRandomNumber(MIN_X, MAX_X) + ', ' + getRandomNumber(MIN_Y, MAX_Y),
     price: getRandomNumber(MIN_PRICE, MAX_PRICE),
@@ -76,8 +77,7 @@ var getOfferData = function () {
     checkout: getRandomElement(CHECK_OUT),
     features: createRandomObject(FEATURES),
     description: getRandomElement(DESCRIPTIONS),
-    photos: createRandomObject(PHOTOS)}, location: {x: getRandomNumber(MIN_X, MAX_X), y: getRandomNumber(MIN_Y, MAX_Y)}};
-};
+    photos: createRandomObject(PHOTOS)}, location: {x: getRandomNumber(MIN_X, MAX_X), y: getRandomNumber(MIN_Y, MAX_Y)}}
 
 var createOffersData = function (count) {
   for (var i = 0; i <= count; i++) {
@@ -154,3 +154,4 @@ mainPin.addEventListener('mousedown', onMainPinClick);
 mainPin.addEventListener('keydown', onMapPinKeyEnter);
 adFormDisabled(adForm, fieldsets);
 createOffersData(OFFERS_AMOUNT);
+
