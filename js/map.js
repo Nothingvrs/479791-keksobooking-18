@@ -10,7 +10,7 @@
     window.form.adressInput.value = Math.round(coordinate.left + window.data.pinWidth / 2) + ', ' + Math.round(coordinate.top + PIN_HEIGHT);
   };
 
-  var onMainPinClick = function () {
+  var pinActivate = function () {
     window.form.ads.classList.remove('ad-form--disabled');
     map.classList.remove('map--faded');
     window.form.toggleDisabled(false);
@@ -18,13 +18,13 @@
     window.pin.render();
   };
 
+  var onMainPinClick = function () {
+    pinActivate();
+  };
+
   var onMapPinKeyEnter = function (evt) {
     if (evt.keyCode === ENTER_KEYCODE) {
-      window.form.ads.classList.remove('ad-form--disabled');
-      map.classList.remove('map--faded');
-      window.form.toggleDisabled(false);
-      setMainPinCoordinate();
-      window.pin.render();
+      pinActivate();
     }
   };
 
