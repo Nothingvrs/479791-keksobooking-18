@@ -1,13 +1,13 @@
 'use strict';
 (function () {
-  window.adForm = document.querySelector('.ad-form');
-  var fieldsets = window.adForm.querySelectorAll('fieldset');
-  window.addressInput = window.adForm.querySelector('[name = address]');
-  var capacityInput = window.adForm.querySelector('[name = capacity]');
-  var roomsInput = window.adForm.querySelector('[name = rooms');
-  var submit = window.adForm.querySelector('.ad-form__submit');
+  var adForm = document.querySelector('.ad-form');
+  var fieldsets = adForm.querySelectorAll('fieldset');
+  var addressInput = adForm.querySelector('[name = address]');
+  var capacityInput = adForm.querySelector('[name = capacity]');
+  var roomsInput = adForm.querySelector('[name = rooms');
+  var submit = adForm.querySelector('.ad-form__submit');
 
-  window.toggleDisabled = function (isDisabled) {
+  var toggleDisabled = function (isDisabled) {
     for (var i = 0; i < fieldsets.length; i++) {
       fieldsets[i].disabled = isDisabled;
     }
@@ -15,7 +15,7 @@
 
   var adFormDisabled = function (form) {
     if (form.classList.contains('ad-form--disabled')) {
-      window.toggleDisabled(true);
+      toggleDisabled(true);
     }
   };
 
@@ -35,5 +35,10 @@
   };
 
   submit.addEventListener('click', onFormSubmit);
-  adFormDisabled(window.adForm, fieldsets);
+  adFormDisabled(adForm, fieldsets);
+
+  window.form = {};
+  window.form.ads = adForm;
+  window.form.coordinate = addressInput;
+  window.form.toggleDisabled = toggleDisabled();
 })();

@@ -7,24 +7,24 @@
 
   var setMainPinCoordinate = function () {
     var coordinate = mainPin.getBoundingClientRect();
-    window.addressInput.value = Math.round(coordinate.left + window.PIN_WIDTH / 2) + ', ' + Math.round(coordinate.top + PIN_HEIGHT);
+    window.form.coordinate.value = Math.round(coordinate.left + window.data.pinWidth / 2) + ', ' + Math.round(coordinate.top + PIN_HEIGHT);
   };
 
   var onMainPinClick = function () {
-    window.adForm.classList.remove('ad-form--disabled');
+    window.form.ads.classList.remove('ad-form--disabled');
     map.classList.remove('map--faded');
-    window.toggleDisabled(false);
+    window.form.toggleDisabled(false);
     setMainPinCoordinate();
-    window.getDrawMapPin(window.OFFERS_AMOUNT);
+    window.pin.getDraw();
   };
 
   var onMapPinKeyEnter = function (evt) {
     if (evt.keyCode === ENTER_KEYCODE) {
-      window.adForm.classList.remove('ad-form--disabled');
+      window.form.ads.classList.remove('ad-form--disabled');
       map.classList.remove('map--faded');
-      window.toggleDisabled(false);
+      window.form.toggleDisabled(false);
       setMainPinCoordinate();
-      window.getDrawMapPin();
+      window.pin.getDraw();
     }
   };
 

@@ -15,12 +15,15 @@
     return mapPin;
   };
 
-  window.getDrawMapPin = function () {
+  var getDrawMapPin = function () {
     var fragment = document.createDocumentFragment();
-    for (var i = 0; i < window.offersData.length; i++) {
-      fragment.appendChild(renderMapPin(window.offersData[i], i));
+    for (var i = 0; i < window.data.offers.length; i++) {
+      fragment.appendChild(renderMapPin(window.data.offers[i], i));
     }
 
     mapOverlay.appendChild(fragment);
   };
+
+  window.pin = {};
+  window.pin.getDraw = getDrawMapPin();
 })();

@@ -14,14 +14,14 @@
   var MAX_GUESTS = 4;
   var MIN_PRICE = 2000000;
   var MAX_PRICE = 10000000;
-  window.PIN_WIDTH = 65;
+  var PIN_WIDTH = 65;
   var WINDOW_WIDTH = 1200;
   var OFFERS_AMOUNT = 7;
-  var MIN_X = window.PIN_WIDTH / 2;
-  var MAX_X = WINDOW_WIDTH - window.PIN_WIDTH / 2;
+  var MIN_X = PIN_WIDTH / 2;
+  var MAX_X = WINDOW_WIDTH - PIN_WIDTH / 2;
   var MIN_Y = 130;
   var MAX_Y = 630;
-  window.offersData = [];
+  var offersData = [];
 
   var getRandomElement = function (arr) {
     var rand = Math.floor(Math.random() * arr.length);
@@ -58,9 +58,13 @@
 
   var createOffersData = function (count) {
     for (var i = 0; i <= count; i++) {
-      window.offersData.push(getOfferData());
+      offersData.push(getOfferData());
     }
   };
 
   createOffersData(OFFERS_AMOUNT);
+
+  window.data = {};
+  window.data.offers = offersData;
+  window.data.pinWidth = PIN_WIDTH;
 })();
