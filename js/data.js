@@ -22,13 +22,16 @@
   window.MIN_Y = 130;
   window.MAX_Y = 630;
   window.offersData = [];
+
   var getRandomElement = function (arr) {
     var rand = Math.floor(Math.random() * arr.length);
     return arr[rand];
   };
+
   var getRandomNumber = function (min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
   };
+
   var createRandomObject = function (collection) {
     var newList = [];
     for (var i = 0; i < getRandomNumber(1, collection.length); i++) {
@@ -36,6 +39,7 @@
     }
     return newList;
   };
+
   var getOfferData = function () {
     return {author: {
       avatar: getRandomElement(AVATARS)}, offer:
@@ -51,10 +55,12 @@
         description: getRandomElement(DESCRIPTIONS),
         photos: createRandomObject(PHOTOS)}, location: {x: getRandomNumber(window.MIN_X, window.MAX_X), y: getRandomNumber(window.MIN_Y, window.MAX_Y)}};
   };
+
   var createOffersData = function (count) {
     for (var i = 0; i <= count; i++) {
       window.offersData.push(getOfferData());
     }
   };
+
   createOffersData(window.OFFERS_AMOUNT);
 })();

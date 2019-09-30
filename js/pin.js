@@ -1,6 +1,7 @@
 'use strict';
 (function () {
   var mapOverlay = document.querySelector('.map__pins');
+
   var renderMapPin = function (pinData) {
     var pinTemplate = document.querySelector('#pin')
       .content;
@@ -13,11 +14,13 @@
     pinImageElement.alt = pinData.offer.title;
     return mapPin;
   };
+
   window.getDrawMapPin = function (count) {
     var fragment = document.createDocumentFragment();
     for (var i = 0; i < count; i++) {
       fragment.appendChild(renderMapPin(window.offersData[i], i));
     }
+
     mapOverlay.appendChild(fragment);
   };
 })();
