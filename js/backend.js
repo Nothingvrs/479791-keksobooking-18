@@ -65,7 +65,7 @@
     errorButton.addEventListener('click', function () {
       errorBody.remove();
       window.form.ads.classList.add('ad-form--disabled');
-      window.map.main.classList.add('map--faded');
+      window.map.parent.classList.add('map--faded');
       window.form.toggleDisabled(true);
     });
   };

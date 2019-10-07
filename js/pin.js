@@ -15,16 +15,16 @@
     return mapPin;
   };
 
-  var onLoad = function (mapPins) {
+  var renderPin = function (pinsData) {
     var fragment = document.createDocumentFragment();
-    for (var i = 0; i < mapPins.length; i++) {
-      if (mapPins[i].offer) {
-        fragment.appendChild(renderMapPin(mapPins[i]));
+    for (var i = 0; i < pinsData.length; i++) {
+      if (pinsData[i].offer) {
+        fragment.appendChild(renderMapPin(pinsData[i]));
       }
     }
     mapOverlay.appendChild(fragment);
   };
 
   window.pin = {};
-  window.pin.onLoad = onLoad;
+  window.pin.onLoad = renderPin;
 })();

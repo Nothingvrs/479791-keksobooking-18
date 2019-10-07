@@ -38,7 +38,7 @@
   mainPin.addEventListener('keydown', onMapPinKeyEnter);
 
   window.map = {};
-  window.map.main = map;
+  window.map.parent = map;
 })();
 
 
