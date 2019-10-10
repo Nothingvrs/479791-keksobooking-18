@@ -15,7 +15,7 @@
     return mapPin;
   };
 
-  var renderPin = function (pinsData) {
+  var renderPins = function (pinsData) {
     var fragment = document.createDocumentFragment();
     var takeNumber = pinsData.length > 5 ? 5 : pinsData.length;
     for (var i = 0; i < takeNumber; i++) {
@@ -27,5 +27,5 @@
   };
 
   window.pin = {};
-  window.pin.renderPin = renderPin;
+  window.pin.renderPins = renderPins;
 })();
