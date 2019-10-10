@@ -1,12 +1,12 @@
 'use strict';
 (function () {
   var filterType = document.getElementById('housing-type');
-
-  var palaceType = window.map.pinsArr.map(function (pin) {
-    pin.offer.type = 'palace';
-  });
   var filteredType = function () {
-    if (filterType.options.selectedIndex === 1) {
+    var palaceType = window.map.pins.map(function (pin) {
+      pin.offer.type = 'house';
+    });
+    if (filterType.options.selectedIndex === 3) {
+
       window.pin.renderPins(palaceType);
     }
   };

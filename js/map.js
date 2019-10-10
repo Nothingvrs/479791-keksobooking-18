@@ -3,7 +3,7 @@
   var PIN_HEIGHT = 65;
   var ENTER_KEYCODE = 13;
   var PIN_WIDTH = 65;
-  var pinsArr = [];
+  var pins = [];
   var map = document.querySelector('.map');
   var mainPin = document.querySelector('.map__pin--main');
 
@@ -13,11 +13,11 @@
   };
 
   var initPins = function (data) {
-    pinsArr = data;
-    window.pin.renderPins(pinsArr);
+    pins = data;
+    window.pin.renderPins(pins);
   };
 
-  var pinActivate = function () {
+  var activateMap = function () {
     window.form.ads.classList.remove('ad-form--disabled');
     map.classList.remove('map--faded');
     window.form.toggleDisabled(false);
@@ -26,12 +26,12 @@
   };
 
   var onMainPinClick = function () {
-    pinActivate();
+    activateMap();
   };
 
   var onMapPinKeyEnter = function (evt) {
     if (evt.keyCode === ENTER_KEYCODE) {
-      pinActivate();
+      activateMap();
     }
   };
 
@@ -45,7 +45,7 @@
 
   window.map = {};
   window.map.parent = map;
-  window.map.pinsArr = pinsArr;
+  window.map.pins = pins;
 })();
 
 
