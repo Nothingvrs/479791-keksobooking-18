@@ -28,4 +28,5 @@
 
   window.pin = {};
   window.pin.renderPins = renderPins;
+  window.pin.mapOverlay = mapOverlay;
 })();
