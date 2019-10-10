@@ -17,7 +17,8 @@
 
   var renderPin = function (pinsData) {
     var fragment = document.createDocumentFragment();
-    for (var i = 0; i < pinsData.length; i++) {
+    var takeNumber = pinsData.length > 5 ? 5 : pinsData.length;
+    for (var i = 0; i < takeNumber; i++) {
       if (pinsData[i].offer) {
         fragment.appendChild(renderMapPin(pinsData[i]));
       }
@@ -26,5 +27,5 @@
   };
 
   window.pin = {};
-  window.pin.onLoad = renderPin;
+  window.pin.renderPin = renderPin;
 })();

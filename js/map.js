@@ -16,8 +16,9 @@
     map.classList.remove('map--faded');
     window.form.toggleDisabled(false);
     setMainPinCoordinate();
-    window.backend.load(window.pin.onLoad, window.backend.mistaken);
+    window.backend.load(window.pin.renderPin, window.backend.mistaken);
   };
+
 
   var onMainPinClick = function () {
     pinActivate();
