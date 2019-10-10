@@ -15,7 +15,7 @@
   var initPins = function (data) {
     pinsArr = data;
     window.pin.renderPins(pinsArr);
-  }
+  };
 
   var pinActivate = function () {
     window.form.ads.classList.remove('ad-form--disabled');
