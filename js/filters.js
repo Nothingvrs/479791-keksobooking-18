@@ -9,43 +9,46 @@
     }
   };
 
-  var arrayUnique = function (array) {
-    var fullArray = array.concat();
-    for (var i = 0; i < fullArray.length; ++i) {
-      for (var j = i + 1; j < fullArray.length; ++j) {
-        if (fullArray[i] === fullArray[j]) {
-          fullArray.splice(j--, 1);
-        }
-      }
-    }
-    return fullArray;
+  var filteredPalace = function () {
+    var palaceType = window.pins.filter(function (pin) {
+      return pin.offer.type === 'palace';
+    });
+    window.pin.renderPins(palaceType);
+  };
+
+  var filteredFlat = function () {
+    var flatType = window.pins.filter(function (pin) {
+      return pin.offer.type === 'flat';
+    });
+    window.pin.renderPins(flatType);
+  };
+
+  var filteredHouse = function () {
+    var houseType = window.pins.filter(function (pin) {
+      return pin.offer.type === 'house';
+    });
+    window.pin.renderPins(houseType);
+  };
+
+  var filteredBungalo = function () {
+    var bungaloType = window.pins.filter(function (pin) {
+      return pin.offer.type === 'bungalo';
+    });
+    window.pin.renderPins(bungaloType);
   };
 
   var filteredType = function () {
     cleanMap();
-    var palaceType = window.pins.filter(function (pin) {
-      return pin.offer.type === 'palace';
-    });
-    var flatType = window.pins.filter(function (pin) {
-      return pin.offer.type === 'flat';
-    });
-    var houseType = window.pins.filter(function (pin) {
-      return pin.offer.type === 'house';
-    });
-    var bungaloType = window.pins.filter(function (pin) {
-      return pin.offer.type === 'bungalo';
-    });
-
     if (filterType.options.selectedIndex === 0) {
       window.pin.renderPins(window.pins);
     } else if (filterType.options.selectedIndex === 1) {
-      window.pin.renderPins(arrayUnique(palaceType.concat(window.pins)));
+      filteredPalace();
     } else if (filterType.options.selectedIndex === 2) {
-      window.pin.renderPins(arrayUnique(flatType.concat(window.pins)));
+      filteredFlat();
     } else if (filterType.options.selectedIndex === 3) {
-      window.pin.renderPins(arrayUnique(houseType.concat(window.pins)));
+      filteredHouse();
     } else if (filterType.options.selectedIndex === 4) {
-      window.pin.renderPins(arrayUnique(bungaloType.concat(window.pins)));
+      filteredBungalo();
     }
   };
   filterType.addEventListener('change', filteredType);
