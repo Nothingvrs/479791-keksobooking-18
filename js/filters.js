@@ -10,16 +10,18 @@
   };
 
   var filteredType = function (value) {
-    var filteredPins = window.pins.filter(function (pin) {
-      return pin.offer.type === value;
-    });
-    window.pin.renderPins(filteredPins);
+    if (value === 'any') {
+      window.pin.renderPins(window.pins);
+    } else {
+      var filteredPins = window.pins.filter(function (pin) {
+        return pin.offer.type === value;
+      });
+      window.pin.renderPins(filteredPins);
+    }
   };
 
   filterType.addEventListener('change', function () {
-    var index = filterType.options.selectedIndex;
-    var selectedValue = filterType.options[index].value;
     cleanMap();
-    filteredType(selectedValue);
+    filteredType(filterType.value);
   });
 })();
