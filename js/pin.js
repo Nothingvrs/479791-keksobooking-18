@@ -1,6 +1,7 @@
 'use strict';
 (function () {
   var mapOverlay = document.querySelector('.map__pins');
+  var MAX_PIN_COUNT = 5;
 
   var renderMapPin = function (pinData) {
     var pinTemplate = document.querySelector('#pin')
@@ -17,7 +18,7 @@
 
   var renderPins = function (pinsData) {
     var fragment = document.createDocumentFragment();
-    var takeNumber = pinsData.length > 5 ? 5 : pinsData.length;
+    var takeNumber = pinsData.length > MAX_PIN_COUNT ? MAX_PIN_COUNT : pinsData.length;
     for (var i = 0; i < takeNumber; i++) {
       if (pinsData[i].offer) {
         fragment.appendChild(renderMapPin(pinsData[i]));
