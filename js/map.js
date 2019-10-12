@@ -13,8 +13,8 @@
   };
 
   var initPins = function (data) {
-    pins = data;
-    window.pin.renderPins(pins);
+    window.map.pins = data;
+    window.pin.renderPins(window.map.pins);
   };
 
   var activateMap = function () {
