@@ -11,9 +11,9 @@
 
   var filteredType = function (value) {
     if (value === 'any') {
-      window.pin.renderPins(window.pins);
+      window.pin.renderPins(window.map.pins);
     } else {
-      var filteredPins = window.pins.filter(function (pin) {
+      var filteredPins = window.map.pins.filter(function (pin) {
         return pin.offer.type === value;
       });
       window.pin.renderPins(filteredPins);
