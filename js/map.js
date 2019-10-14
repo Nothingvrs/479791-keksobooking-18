@@ -3,7 +3,6 @@
   var PIN_HEIGHT = 65;
   var ENTER_KEYCODE = 13;
   var PIN_WIDTH = 65;
-  var pins = [];
   var map = document.querySelector('.map');
   var mainPin = document.querySelector('.map__pin--main');
 
@@ -46,7 +45,6 @@
 
   window.map = {};
   window.map.parent = map;
-  window.map.pins = pins;
 })();
 
 
