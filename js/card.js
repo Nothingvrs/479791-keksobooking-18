@@ -1,14 +1,19 @@
 'use strict';
 (function () {
   var definitionType = function (type) {
-    if (type === 'flat') {
-      var typeText = 'Квартира';
-    } else if (type === 'bungalo') {
-      typeText = 'Бунгало';
-    } else if (type === 'house') {
-      typeText = 'Дом';
-    } else if (type === 'palace') {
-      typeText = 'Дворец';
+    var typeText;
+    switch (type) {
+      case 'flat':
+        typeText = 'Квартира';
+        break;
+      case 'bungalo':
+        typeText = 'Бунгало';
+        break;
+      case 'house':
+        typeText = 'Дом';
+        break;
+      case 'palace':
+        typeText = 'Дворец';
     } return typeText;
   };
 
@@ -42,27 +47,22 @@
     var cardDescription = card.querySelector('.popup__description');
     var cardAvatar = card.querySelector('.popup__avatar');
     var cardPhotos = card.querySelector('.popup__photos');
-    cardTitle.value = cardData.offer.title;
-    cardAddress.value = cardData.offer.address;
-    cardPrice.value = cardData.offer.price + 'р/ночь';
+    cardTitle.textContent = cardData.offer.title;
+    cardAddress.textContent = cardData.offer.address;
+    cardPrice.textContent = cardData.offer.price + ' р/ночь';
     cardType.value = definitionType(cardData.offer.type);
-    cardCapacity.value = cardData.offer.rooms + ' комнаты для ' + cardData.offer.guests + ' гостей';
-    cardTime.value = 'Заезд после ' + cardData.offer.checkin + ' выезд до ' + cardData.offer.checkout;
+    cardCapacity.textContent = cardData.offer.rooms + ' комнаты для ' + cardData.offer.guests + ' гостей';
+    cardTime.textContent = 'Заезд после ' + cardData.offer.checkin + ' выезд до ' + cardData.offer.checkout;
     getFeaturesList(cardData.offer.features, cardFeatures);
-    cardDescription.value = cardData.offer.description;
+    cardDescription.textContent = cardData.offer.description;
     cardAvatar.src = cardData.author.avatar;
     getCardPhotos(cardPhotos, cardData.offer.photos);
     return card;
   };
 
-  var renderCards = function (cardsData) {
-    var fragment = document.createDocumentFragment();
-    for (var i = 0; i < cardsData.length; i++) {
-      fragment.appendChild(renderCard(cardsData[i]));
-    }
-    window.filters.parent.before(fragment);
+  var drawCard = function (dataCard, i) {
+    window.map.parent.appendChild(renderCard(dataCard[i]));
   };
-
   window.card = {};
-  window.card.renderCards = renderCards;
+  window.card.drawCard = drawCard;
 })();

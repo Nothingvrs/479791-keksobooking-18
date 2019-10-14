@@ -1,6 +1,5 @@
 'use strict';
 (function () {
-  var filters = document.querySelector('.map__filters-container');
   var filterType = document.querySelector('[name = housing-type]');
 
   var cleanMap = function () {
@@ -25,7 +24,4 @@
     cleanMap();
     filteredType(filterType.value);
   });
-
-  window.filters = {};
-  window.filters.parent = filters;
 })();
