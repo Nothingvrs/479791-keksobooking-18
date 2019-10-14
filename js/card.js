@@ -20,12 +20,12 @@
     photosElement.innerHTML = photosContent;
   };
 
-  var getFeaturesList = function (arr, futureElements) {
+  var getFeaturesList = function (features, futureElement) {
     var featuresContent = '';
-    arr.forEach(function (feature) {
+    features.forEach(function (feature) {
       featuresContent += '<li class="popup__feature popup__feature--' + feature + '"></li>';
     });
-    futureElements.innerHTML = featuresContent;
+    futureElement.innerHTML = featuresContent;
   };
 
   var renderCard = function (cardData) {
