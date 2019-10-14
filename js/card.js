@@ -60,9 +60,6 @@
     return card;
   };
 
-  var drawCard = function (dataCard, i) {
-    window.map.parent.appendChild(renderCard(dataCard[i]));
-  };
   window.card = {};
-  window.card.drawCard = drawCard;
+  window.card.renderCard = renderCard;
 })();

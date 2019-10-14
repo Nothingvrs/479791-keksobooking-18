@@ -15,7 +15,7 @@
   var initPins = function (data) {
     window.map.pins = data;
     window.pin.renderPins(window.map.pins);
-    window.card.drawCard(window.map.pins, 1);
+    map.appendChild(window.card.renderCard(window.map.pins[0]));
   };
 
   var activateMap = function () {
