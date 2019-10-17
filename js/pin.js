@@ -18,10 +18,10 @@
 
   var renderPins = function (pinsData) {
     var fragment = document.createDocumentFragment();
-    var slicedPinsData = pinsData.slice(0, MAX_PIN_COUNT);
-    for (var i = 0; i < slicedPinsData.length; i++) {
+    window.pin.slicedPinsData = pinsData.slice(0, MAX_PIN_COUNT);
+    for (var i = 0; i < window.pin.slicedPinsData.length; i++) {
       if (pinsData[i].offer) {
-        fragment.appendChild(renderMapPin(slicedPinsData[i]));
+        fragment.appendChild(renderMapPin(window.pin.slicedPinsData[i]));
       }
     }
     mapOverlay.appendChild(fragment);
