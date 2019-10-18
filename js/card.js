@@ -52,7 +52,7 @@
     cardTitle.textContent = cardData.offer.title;
     cardAddress.textContent = cardData.offer.address;
     cardPrice.textContent = cardData.offer.price + ' р/ночь';
-    cardType.value = definitionType(cardData.offer.type);
+    cardType.textContent = definitionType(cardData.offer.type);
     cardCapacity.textContent = cardData.offer.rooms + ' комнаты для ' + cardData.offer.guests + ' гостей';
     cardTime.textContent = 'Заезд после ' + cardData.offer.checkin + ' выезд до ' + cardData.offer.checkout;
     getFeaturesList(cardData.offer.features, cardFeatures);

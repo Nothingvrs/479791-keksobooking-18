@@ -22,16 +22,17 @@
     }
   };
 
-  var adFormDisabled = function (form) {
-    if (form.classList.contains('ad-form--disabled')) {
-      toggleDisabled(true);
-    }
-  };
-
   var onTypeInputChange = function (evt) {
     var minPrice = BuildingMinPrice[evt.target.value.toUpperCase()];
     priceInput.min = minPrice;
     priceInput.placeholder = minPrice.toString();
+  };
+
+  var adFormDisabled = function (form) {
+    if (form.classList.contains('ad-form--disabled')) {
+      toggleDisabled(true);
+      typeInput.addEventListener('change', onTypeInputChange);
+    }
   };
 
   var validateRooms = function () {
@@ -49,7 +50,6 @@
     validateRooms();
   };
 
-  typeInput.addEventListener('change', onTypeInputChange);
   submit.addEventListener('click', onFormSubmit);
   adFormDisabled(adForm, fieldsets);
 

@@ -25,6 +25,7 @@
 
   var onMainPinClick = function () {
     activateMap();
+    mainPin.removeEventListener('mousedown', onMainPinClick);
   };
 
   var onMapPinKeyEnter = function (evt) {
