@@ -42,28 +42,8 @@
   mainPin.addEventListener('mousedown', onMainPinClick);
   mainPin.addEventListener('keydown', onMapPinKeyEnter);
 
-  var getCloseButton = function () {
-    var closeButton = window.map.parent.querySelector('.popup__close');
-    closeButton.setAttribute('tabindex', '0');
-    document.addEventListener('keydown', onPopupEscPress);
-    closeButton.addEventListener('mouseup', function () {
-      closeAd();
-    });
-  };
-
-  function onPopupEscPress(evt) {
-    window.utils.isEscEvent(evt, closeAd);
-  }
-
-  function closeAd() {
-    var mapCard = window.map.parent.querySelector('.map__card');
-    window.map.parent.removeChild(mapCard);
-    window.map.parent.querySelector('.map__pin--active').classList.remove('map__pin--active');
-    document.removeEventListener('keydown', onPopupEscPress);
-  }
   window.map = {};
   window.map.parent = map;
-  window.map.getCloseButton = getCloseButton;
 })();
 
 
