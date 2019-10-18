@@ -13,6 +13,14 @@
     pinBody.style.left = pinData.location.x + 'px';
     pinBody.style.top = pinData.location.y + 'px';
     pinImageElement.alt = pinData.offer.title;
+    var onPinItemClick = function () {
+      var mapCardRemovable = window.map.parent.querySelector('.map__card');
+      if (mapCardRemovable) {
+        mapCardRemovable.remove();
+      }
+      window.map.parent.appendChild(window.card.renderCard(pinData));
+    };
+    pinBody.addEventListener('click', onPinItemClick);
     return mapPin;
   };
 

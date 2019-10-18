@@ -42,10 +42,6 @@
   mainPin.addEventListener('mousedown', onMainPinClick);
   mainPin.addEventListener('keydown', onMapPinKeyEnter);
 
-  map.addEventListener('click', function (evt) {
-    window.showCard.parent(evt, window.pin.slicedPinsData);
-  });
-
   var getCloseButton = function () {
     var closeButton = window.map.parent.querySelector('.popup__close');
     closeButton.setAttribute('tabindex', '0');

@@ -1,10 +1,19 @@
 'use strict';
 (function () {
+  var BuildingMinPrice = {
+    BUNGALO: 0,
+    FLAT: 1000,
+    HOUSE: 5000,
+    PALACE: 10000
+  };
+
   var adForm = document.querySelector('.ad-form');
   var fieldsets = adForm.querySelectorAll('fieldset');
   var addressInput = adForm.querySelector('[name = address]');
   var capacityInput = adForm.querySelector('[name = capacity]');
   var roomsInput = adForm.querySelector('[name = rooms');
+  var priceInput = adForm.querySelector('#price');
+  var typeInput = adForm.querySelector('#type');
   var submit = adForm.querySelector('.ad-form__submit');
 
   var toggleDisabled = function (isDisabled) {
@@ -17,6 +26,12 @@
     if (form.classList.contains('ad-form--disabled')) {
       toggleDisabled(true);
     }
+  };
+
+  var onTypeInputChange = function (evt) {
+    var minPrice = BuildingMinPrice[evt.target.value.toUpperCase()];
+    priceInput.min = minPrice;
+    priceInput.placeholder = minPrice.toString();
   };
 
   var validateRooms = function () {
@@ -34,6 +49,7 @@
     validateRooms();
   };
 
+  typeInput.addEventListener('change', onTypeInputChange);
   submit.addEventListener('click', onFormSubmit);
   adFormDisabled(adForm, fieldsets);
 

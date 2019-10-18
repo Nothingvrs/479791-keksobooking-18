@@ -2,7 +2,7 @@
 
 (function () {
 
-  var isEscEvent = function (evt, action) {
+  var onEscDown = function (evt, action) {
     var ESC_KEYCODE = 27;
     if (evt.keyCode === ESC_KEYCODE) {
       action();
@@ -18,5 +18,5 @@
 
   window.utils = {};
   window.utils.isEnterEvent = isEnterEvent;
-  window.utils.isEscEvent = isEscEvent;
+  window.utils.onEscDown = onEscDown;
 })();

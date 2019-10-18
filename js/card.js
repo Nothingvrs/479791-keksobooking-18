@@ -47,6 +47,7 @@
     var cardDescription = card.querySelector('.popup__description');
     var cardAvatar = card.querySelector('.popup__avatar');
     var cardPhotos = card.querySelector('.popup__photos');
+    var cardBody = card.querySelector('.map__card');
     cardTitle.textContent = cardData.offer.title;
     cardAddress.textContent = cardData.offer.address;
     cardPrice.textContent = cardData.offer.price + ' р/ночь';
@@ -57,6 +58,20 @@
     cardDescription.textContent = cardData.offer.description;
     cardAvatar.src = cardData.author.avatar;
     getCardPhotos(cardPhotos, cardData.offer.photos);
+    var closeCardBtn = card.querySelector('.popup__close');
+    var closeCard = function () {
+      cardBody.remove();
+      closeCardBtn.removeEventListener('click', onCloseCardBtnClick);
+      document.removeEventListener('keydown', onAdEscDown);
+    };
+    var onCloseCardBtnClick = function () {
+      closeCard();
+    };
+    closeCardBtn.addEventListener('click', onCloseCardBtnClick);
+    var onAdEscDown = function (evt) {
+      window.utils.onEscDown(evt, closeCard);
+    };
+    document.addEventListener('keydown', onAdEscDown);
     return card;
   };
 
