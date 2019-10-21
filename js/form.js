@@ -16,6 +16,10 @@
   var typeInput = adForm.querySelector('#type');
   var submit = adForm.querySelector('.ad-form__submit');
 
+  var setAddressCoords = function (coords) {
+    addressInput.value = coords.x + ', ' + coords.y;
+  };
+
   var toggleDisabled = function (isDisabled) {
     for (var i = 0; i < fieldsets.length; i++) {
       fieldsets[i].disabled = isDisabled;
@@ -56,5 +60,6 @@
   window.form = {};
   window.form.ads = adForm;
   window.form.adressInput = addressInput;
+  window.form.setAddress = setAddressCoords;
   window.form.toggleDisabled = toggleDisabled;
 })();
