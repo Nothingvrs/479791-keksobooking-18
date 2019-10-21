@@ -5,15 +5,13 @@
   var TAIL_HEIGHT = 16;
   var DEFAULT_MAIN_PIN_X = 600;
   var DEFAULT_MAIN_PIN_Y = 375;
-  var PIN_WIDTH = 65;
-  var PIN_HEIGHT = 65;
   var activePage = false;
-  var PinSize = {
+  var pinSize = {
     WIDTH: 65,
     HEIGHT: 65,
   };
 
-  var DragLimit = {
+  var dragLimit = {
     X: {
       MIN: 0,
       MAX: 1200
@@ -24,9 +22,16 @@
     }
   };
 
+  var border = {
+    TOP: dragLimit.Y.MIN - pinSize.HEIGHT - TAIL_HEIGHT,
+    BOTTOM: dragLimit.Y.MAX - pinSize.HEIGHT - TAIL_HEIGHT,
+    LEFT: dragLimit.X.MIN - Math.ceil(pinSize.WIDTH / 2),
+    RIGHT: dragLimit.X.MAX - Math.ceil(pinSize.WIDTH / 2)
+  };
+
   var setMainPinCoordinate = function () {
     var coordinate = mainPin.getBoundingClientRect();
-    window.form.adressInput.value = Math.round(coordinate.left + PIN_WIDTH / 2) + ', ' + Math.round(coordinate.top + PIN_HEIGHT);
+    window.form.adressInput.value = Math.round(coordinate.left + pinSize.WIDTH / 2) + ', ' + Math.round(coordinate.top + pinSize.HEIGHT);
   };
 
   var removePins = function () {
@@ -46,8 +51,8 @@
     map.classList.add('map--faded');
     removePins();
     removeMapCard();
-    mainPin.style.top = DEFAULT_MAIN_PIN_Y - PinSize.HEIGHT / 2 + 'px';
-    mainPin.style.left = DEFAULT_MAIN_PIN_X - PinSize.WIDTH / 2 + 'px';
+    mainPin.style.top = DEFAULT_MAIN_PIN_Y - pinSize.HEIGHT / 2 + 'px';
+    mainPin.style.left = DEFAULT_MAIN_PIN_X - pinSize.WIDTH / 2 + 'px';
     activePage = false;
   };
 
@@ -90,23 +95,26 @@
         x: mainPin.offsetLeft - shift.x,
         y: mainPin.offsetTop - shift.y
       };
-      var Border = {
-        TOP: DragLimit.Y.MIN - mainPin.offsetHeight - TAIL_HEIGHT,
-        BOTTOM: DragLimit.Y.MAX - mainPin.offsetHeight - TAIL_HEIGHT,
-        LEFT: DragLimit.X.MIN,
-        RIGHT: DragLimit.X.MAX - mainPin.offsetWidth
+
+      var pinTailCoordinates = {
+        x: mainPinPosition.x + Math.ceil(pinSize.WIDTH / 2),
+        y: mainPinPosition.y + pinSize.HEIGHT + TAIL_HEIGHT
       };
-      if (mainPinPosition.x >= Border.LEFT && mainPinPosition.x <= Border.RIGHT) {
-        mainPin.style.left = mainPinPosition.x + 'px';
+
+      mainPin.style.left = mainPinPosition.x + 'px';
+      mainPin.style.top = mainPinPosition.y + 'px';
+
+      if (pinTailCoordinates.x < dragLimit.X.MIN) {
+        mainPin.style.left = border.LEFT + 'px';
+      } else if (pinTailCoordinates.x > dragLimit.X.MAX) {
+        mainPin.style.left = border.RIGHT + 'px';
+      } else if (pinTailCoordinates.y > dragLimit.Y.MAX) {
+        mainPin.style.top = border.BOTTOM + 'px';
+      } else if (pinTailCoordinates.y < dragLimit.Y.MIN) {
+        mainPin.style.top = border.TOP + 'px';
       }
-      if (mainPinPosition.y >= Border.TOP && mainPinPosition.y <= Border.BOTTOM) {
-        mainPin.style.top = mainPinPosition.y + 'px';
-      }
-      var pinTailCoords = {
-        x: mainPinPosition.x + Math.ceil(PinSize.WIDTH / 2),
-        y: mainPinPosition.y + PinSize.HEIGHT + TAIL_HEIGHT
-      };
-      window.form.setAddress(pinTailCoords);
+
+      window.form.setAddress(pinTailCoordinates);
     };
 
     var onMouseUp = function (upEvt) {
