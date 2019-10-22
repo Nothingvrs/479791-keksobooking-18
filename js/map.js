@@ -22,9 +22,14 @@
     }
   };
 
-  var setMainPinCoordinate = function () {
-    var coordinate = mainPin.getBoundingClientRect();
-    window.form.adressInput.value = Math.round(coordinate.left + pinSize.WIDTH / 2) + ', ' + Math.round(coordinate.top + pinSize.HEIGHT);
+  var defaultMainPinCoordinates = {
+    x: DEFAULT_MAIN_PIN_X + Math.floor(pinSize.HEIGHT / 2),
+    y: DEFAULT_MAIN_PIN_Y + pinSize.HEIGHT + TAIL_HEIGHT
+  };
+
+  var PinCircleCoordinate = {
+    y: DEFAULT_MAIN_PIN_Y - Math.floor(pinSize.HEIGHT / 2),
+    x: DEFAULT_MAIN_PIN_X - Math.floor(pinSize.HEIGHT / 2)
   };
 
   var removePins = function () {
@@ -46,7 +51,7 @@
     removeMapCard();
     mainPin.style.top = DEFAULT_MAIN_PIN_Y - pinSize.HEIGHT / 2 + 'px';
     mainPin.style.left = DEFAULT_MAIN_PIN_X - pinSize.WIDTH / 2 + 'px';
-    window.form.setAddress(mainPin);
+    window.form.setAddress(PinCircleCoordinate);
     activePage = false;
   };
 
@@ -64,7 +69,7 @@
     window.form.ads.classList.remove('ad-form--disabled');
     map.classList.remove('map--faded');
     window.form.toggleDisabled(false);
-    setMainPinCoordinate();
+    window.form.setAddress(defaultMainPinCoordinates);
     window.backend.load(initPins, window.backend.mistaken);
   };
 
