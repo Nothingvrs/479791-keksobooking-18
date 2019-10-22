@@ -22,13 +22,6 @@
     }
   };
 
-  var border = {
-    TOP: dragLimit.Y.MIN - pinSize.HEIGHT - TAIL_HEIGHT,
-    BOTTOM: dragLimit.Y.MAX - pinSize.HEIGHT - TAIL_HEIGHT,
-    LEFT: dragLimit.X.MIN - Math.round(pinSize.WIDTH / 2),
-    RIGHT: dragLimit.X.MAX - Math.round(pinSize.WIDTH / 2)
-  };
-
   var setMainPinCoordinate = function () {
     var coordinate = mainPin.getBoundingClientRect();
     window.form.adressInput.value = Math.round(coordinate.left + pinSize.WIDTH / 2) + ', ' + Math.round(coordinate.top + pinSize.HEIGHT);
@@ -53,6 +46,7 @@
     removeMapCard();
     mainPin.style.top = DEFAULT_MAIN_PIN_Y - pinSize.HEIGHT / 2 + 'px';
     mainPin.style.left = DEFAULT_MAIN_PIN_X - pinSize.WIDTH / 2 + 'px';
+    window.form.setAddress(mainPin);
     activePage = false;
   };
 
@@ -97,28 +91,16 @@
       };
 
       var pinTailCoordinates = {
-        x: mainPinPosition.x + Math.round(pinSize.WIDTH / 2),
+        x: mainPinPosition.x + Math.floor(pinSize.WIDTH / 2),
         y: mainPinPosition.y + pinSize.HEIGHT + TAIL_HEIGHT
       };
 
-      mainPin.style.left = mainPinPosition.x + 'px';
-      mainPin.style.top = mainPinPosition.y + 'px';
+      if (pinTailCoordinates.x > dragLimit.X.MIN && pinTailCoordinates.x < dragLimit.X.MAX) {
+        mainPin.style.left = mainPinPosition.x + 'px';
+      }
 
-      if (pinTailCoordinates.x < dragLimit.X.MIN) {
-        mainPin.style.left = border.LEFT + 'px';
-        pinTailCoordinates.x = dragLimit.X.MIN;
-      }
-      if (pinTailCoordinates.x > dragLimit.X.MAX) {
-        mainPin.style.left = border.RIGHT + 'px';
-        pinTailCoordinates.x = dragLimit.X.MAX;
-      }
-      if (pinTailCoordinates.y > dragLimit.Y.MAX) {
-        mainPin.style.top = border.BOTTOM + 'px';
-        pinTailCoordinates.y = dragLimit.Y.MAX;
-      }
-      if (pinTailCoordinates.y < dragLimit.Y.MIN) {
-        mainPin.style.top = border.TOP + 'px';
-        pinTailCoordinates.y = dragLimit.Y.MIN;
+      if (pinTailCoordinates.y < dragLimit.Y.MAX && pinTailCoordinates.y > dragLimit.Y.MIN) {
+        mainPin.style.top = mainPinPosition.y + 'px';
       }
 
       window.form.setAddress(pinTailCoordinates);
