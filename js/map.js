@@ -1,17 +1,16 @@
 'use strict';
 (function () {
-  var map = document.querySelector('.map');
-  var mainPin = document.querySelector('.map__pin--main');
   var TAIL_HEIGHT = 16;
   var DEFAULT_MAIN_PIN_X = 600;
   var DEFAULT_MAIN_PIN_Y = 375;
   var activePage = false;
-  var pinSize = {
+
+  var PinSize = {
     WIDTH: 65,
     HEIGHT: 65,
   };
 
-  var dragLimit = {
+  var DragLimit = {
     X: {
       MIN: 0,
       MAX: 1200
@@ -22,15 +21,18 @@
     }
   };
 
-  var defaultMainPinCoordinates = {
-    x: DEFAULT_MAIN_PIN_X + Math.floor(pinSize.HEIGHT / 2),
-    y: DEFAULT_MAIN_PIN_Y + pinSize.HEIGHT + TAIL_HEIGHT
+  var DefaultMainPinCoordinates = {
+    x: DEFAULT_MAIN_PIN_X + Math.floor(PinSize.HEIGHT / 2),
+    y: DEFAULT_MAIN_PIN_Y + PinSize.HEIGHT + TAIL_HEIGHT
   };
 
   var PinCircleCoordinate = {
-    y: DEFAULT_MAIN_PIN_Y - Math.floor(pinSize.HEIGHT / 2),
-    x: DEFAULT_MAIN_PIN_X - Math.floor(pinSize.HEIGHT / 2)
+    y: DEFAULT_MAIN_PIN_Y - Math.floor(PinSize.HEIGHT / 2),
+    x: DEFAULT_MAIN_PIN_X - Math.floor(PinSize.HEIGHT / 2)
   };
+
+  var map = document.querySelector('.map');
+  var mainPin = document.querySelector('.map__pin--main');
 
   var removePins = function () {
     var mapPinsItems = document.querySelectorAll('.map__pin:not(.map__pin--main)');
@@ -49,8 +51,6 @@
     map.classList.add('map--faded');
     removePins();
     removeMapCard();
-    mainPin.style.top = DEFAULT_MAIN_PIN_Y - pinSize.HEIGHT / 2 + 'px';
-    mainPin.style.left = DEFAULT_MAIN_PIN_X - pinSize.WIDTH / 2 + 'px';
     window.form.setAddress(PinCircleCoordinate);
     activePage = false;
   };
@@ -69,7 +69,7 @@
     window.form.ads.classList.remove('ad-form--disabled');
     map.classList.remove('map--faded');
     window.form.toggleDisabled(false);
-    window.form.setAddress(defaultMainPinCoordinates);
+    window.form.setAddress(DefaultMainPinCoordinates);
     window.backend.load(initPins, window.backend.mistaken);
   };
 
@@ -96,15 +96,15 @@
       };
 
       window.map.pinTailCoordinates = {
-        x: mainPinPosition.x + Math.floor(pinSize.WIDTH / 2),
-        y: mainPinPosition.y + pinSize.HEIGHT + TAIL_HEIGHT
+        x: mainPinPosition.x + Math.floor(PinSize.WIDTH / 2),
+        y: mainPinPosition.y + PinSize.HEIGHT + TAIL_HEIGHT
       };
 
-      if (window.map.pinTailCoordinates.x > dragLimit.X.MIN && window.map.pinTailCoordinates.x < dragLimit.X.MAX) {
+      if (window.map.pinTailCoordinates.x > DragLimit.X.MIN && window.map.pinTailCoordinates.x < DragLimit.X.MAX) {
         mainPin.style.left = mainPinPosition.x + 'px';
       }
 
-      if (window.map.pinTailCoordinates.y < dragLimit.Y.MAX && window.map.pinTailCoordinates.y > dragLimit.Y.MIN) {
+      if (window.map.pinTailCoordinates.y < DragLimit.Y.MAX && window.map.pinTailCoordinates.y > DragLimit.Y.MIN) {
         mainPin.style.top = mainPinPosition.y + 'px';
       }
     };
