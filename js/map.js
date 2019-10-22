@@ -25,8 +25,8 @@
   var border = {
     TOP: dragLimit.Y.MIN - pinSize.HEIGHT - TAIL_HEIGHT,
     BOTTOM: dragLimit.Y.MAX - pinSize.HEIGHT - TAIL_HEIGHT,
-    LEFT: dragLimit.X.MIN - Math.ceil(pinSize.WIDTH / 2),
-    RIGHT: dragLimit.X.MAX - Math.ceil(pinSize.WIDTH / 2)
+    LEFT: dragLimit.X.MIN - Math.round(pinSize.WIDTH / 2),
+    RIGHT: dragLimit.X.MAX - Math.round(pinSize.WIDTH / 2)
   };
 
   var setMainPinCoordinate = function () {
@@ -97,7 +97,7 @@
       };
 
       var pinTailCoordinates = {
-        x: mainPinPosition.x + Math.ceil(pinSize.WIDTH / 2),
+        x: mainPinPosition.x + Math.round(pinSize.WIDTH / 2),
         y: mainPinPosition.y + pinSize.HEIGHT + TAIL_HEIGHT
       };
 
@@ -106,12 +106,19 @@
 
       if (pinTailCoordinates.x < dragLimit.X.MIN) {
         mainPin.style.left = border.LEFT + 'px';
-      } else if (pinTailCoordinates.x > dragLimit.X.MAX) {
+        pinTailCoordinates.x = dragLimit.X.MIN;
+      }
+      if (pinTailCoordinates.x > dragLimit.X.MAX) {
         mainPin.style.left = border.RIGHT + 'px';
-      } else if (pinTailCoordinates.y > dragLimit.Y.MAX) {
+        pinTailCoordinates.x = dragLimit.X.MAX;
+      }
+      if (pinTailCoordinates.y > dragLimit.Y.MAX) {
         mainPin.style.top = border.BOTTOM + 'px';
-      } else if (pinTailCoordinates.y < dragLimit.Y.MIN) {
+        pinTailCoordinates.y = dragLimit.Y.MAX;
+      }
+      if (pinTailCoordinates.y < dragLimit.Y.MIN) {
         mainPin.style.top = border.TOP + 'px';
+        pinTailCoordinates.y = dragLimit.Y.MIN;
       }
 
       window.form.setAddress(pinTailCoordinates);
