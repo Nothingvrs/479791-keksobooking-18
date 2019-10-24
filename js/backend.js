@@ -1,35 +1,13 @@
 'use strict';
 
 (function () {
-  var URL_SAVE = 'https://js.dump.academy/code-and-magick';
 
-  var save = function (data, onSuccess, onError) {
-    var xhr = new XMLHttpRequest();
-    xhr.responseType = 'json';
-
-    xhr.addEventListener('load', function () {
-      if (xhr.status === 200) {
-        onSuccess(xhr.response);
-      } else {
-        onError('Статус ответа: ' + xhr.status + ' ' + xhr.statusText);
-      }
-    });
-    xhr.addEventListener('error', function () {
-      onError('Произошла ошибка соединения');
-    });
-    xhr.addEventListener('timeout', function () {
-      onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
-    });
-
-    xhr.timeout = 10000; // 10s
-
-    xhr.open('POST', URL_SAVE);
-    xhr.send(data);
+  var ServerUrl = {
+    LOAD: 'https://js.dump.academy/keksobooking/data',
+    UPLOAD: 'https://js.dump.academy/keksobooking'
   };
 
-  var URL_LOAD = 'https://js.dump.academy/keksobooking/data';
-
-  var load = function (onLoad, onError) {
+  var createXhr = function (method, url, onLoad, onError) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
 
@@ -49,9 +27,18 @@
 
     xhr.timeout = 10000; // 10s
 
-    xhr.open('GET', URL_LOAD);
-    xhr.send();
+    xhr.open(method, url);
+    return xhr;
   };
+
+  var load = function (onLoad, onError) {
+    createXhr('GET', ServerUrl.LOAD, onLoad, onError).send();
+  };
+
+  var upload = function (onLoad, onError, data) {
+    createXhr('POST', ServerUrl.UPLOAD, onLoad, onError).send(data);
+  };
+
 
   var onError = function (errorMessage) {
     var errorTemplate = document.querySelector('#error')
@@ -66,12 +53,11 @@
       errorBody.remove();
       window.form.ads.classList.add('ad-form--disabled');
       window.map.parent.classList.add('map--faded');
-      window.form.toggleDisabled(true);
     });
   };
 
   window.backend = {};
-  window.backend.save = save;
+  window.backend.upload = upload;
   window.backend.load = load;
   window.backend.mistaken = onError;
 })();
