@@ -26,6 +26,8 @@
     y: DEFAULT_MAIN_PIN_Y + PinSize.HEIGHT + TAIL_HEIGHT
   };
 
+  var pinTailCoordinates = DefaultMainPinCoordinates;
+
   var PinCircleCoordinate = {
     y: DEFAULT_MAIN_PIN_Y - Math.floor(PinSize.HEIGHT / 2),
     x: DEFAULT_MAIN_PIN_X - Math.floor(PinSize.HEIGHT / 2)
@@ -53,7 +55,7 @@
     removeMapCard();
     mainPin.style.top = DEFAULT_MAIN_PIN_Y - PinSize.HEIGHT / 2 + 'px';
     mainPin.style.left = DEFAULT_MAIN_PIN_X - PinSize.WIDTH / 2 + 'px';
-    window.form.setAddressCoords(PinCircleCoordinate);
+    window.form.setAddressCoordinates(PinCircleCoordinate);
     activePage = false;
   };
 
@@ -71,8 +73,8 @@
     window.form.ads.classList.remove('ad-form--disabled');
     map.classList.remove('map--faded');
     window.form.activateForm();
-    window.form.setAddressCoords(DefaultMainPinCoordinates);
-    window.backend.load(initPins, window.backend.mistaken);
+    window.form.setAddressCoordinates(DefaultMainPinCoordinates);
+    window.backend.get(initPins, window.backend.mistaken);
   };
 
   var onMainPinMouseDown = function (evt) {
@@ -97,16 +99,16 @@
         y: mainPin.offsetTop - shift.y
       };
 
-      window.map.pinTailCoordinates = {
+      pinTailCoordinates = {
         x: mainPinPosition.x + Math.floor(PinSize.WIDTH / 2),
         y: mainPinPosition.y + PinSize.HEIGHT + TAIL_HEIGHT
       };
 
-      if (window.map.pinTailCoordinates.x > DragLimit.X.MIN && window.map.pinTailCoordinates.x < DragLimit.X.MAX) {
+      if (pinTailCoordinates.x > DragLimit.X.MIN && pinTailCoordinates.x < DragLimit.X.MAX) {
         mainPin.style.left = mainPinPosition.x + 'px';
       }
 
-      if (window.map.pinTailCoordinates.y < DragLimit.Y.MAX && window.map.pinTailCoordinates.y > DragLimit.Y.MIN) {
+      if (pinTailCoordinates.y < DragLimit.Y.MAX && pinTailCoordinates.y > DragLimit.Y.MIN) {
         mainPin.style.top = mainPinPosition.y + 'px';
       }
     };
@@ -122,7 +124,7 @@
 
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseup', onMouseUp);
-      window.form.setAddressCoords(window.map.pinTailCoordinates);
+      window.form.setAddressCoordinates(pinTailCoordinates);
     };
 
     document.addEventListener('mousemove', onMouseMove);

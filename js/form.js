@@ -24,8 +24,8 @@
     priceInput.placeholder = minPrice.toString();
   };
 
-  var setAddressCoords = function (coords) {
-    addressInput.value = coords.x + ', ' + coords.y;
+  var setAddressCoordinates = function (coordinates) {
+    addressInput.value = coordinates.x + ', ' + coordinates.y;
   };
 
   var validateRooms = function () {
@@ -67,7 +67,7 @@
   var onAdFormSubmit = function (evt) {
     evt.preventDefault();
     var formData = new FormData(adForm);
-    window.backend.upload(onSubmitSuccess, onSubmitError, formData);
+    window.backend.set(onSubmitSuccess, onSubmitError, formData);
   };
 
   var onSubmitBtnClick = function () {
@@ -118,5 +118,5 @@
   window.form = {};
   window.form.ads = adForm;
   window.form.activateForm = activateForm;
-  window.form.setAddressCoords = setAddressCoords;
+  window.form.setAddressCoordinates = setAddressCoordinates;
 })();

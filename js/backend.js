@@ -31,11 +31,11 @@
     return xhr;
   };
 
-  var load = function (onLoad, onError) {
+  var get = function (onLoad, onError) {
     createXhr('GET', ServerUrl.LOAD, onLoad, onError).send();
   };
 
-  var upload = function (onLoad, onError, data) {
+  var set = function (onLoad, onError, data) {
     createXhr('POST', ServerUrl.UPLOAD, onLoad, onError).send(data);
   };
 
@@ -57,7 +57,7 @@
   };
 
   window.backend = {};
-  window.backend.upload = upload;
-  window.backend.load = load;
+  window.backend.set = set;
+  window.backend.get = get;
   window.backend.mistaken = onError;
 })();
