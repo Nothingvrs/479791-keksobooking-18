@@ -3,8 +3,8 @@
 (function () {
 
   var ServerUrl = {
-    LOAD: 'https://js.dump.academy/keksobooking/data',
-    UPLOAD: 'https://js.dump.academy/keksobooking'
+    GET: 'https://js.dump.academy/keksobooking/data',
+    SET: 'https://js.dump.academy/keksobooking'
   };
 
   var createXhr = function (method, url, onLoad, onError) {
@@ -32,11 +32,11 @@
   };
 
   var get = function (onLoad, onError) {
-    createXhr('GET', ServerUrl.LOAD, onLoad, onError).send();
+    createXhr('GET', ServerUrl.GET, onLoad, onError).send();
   };
 
   var set = function (onLoad, onError, data) {
-    createXhr('POST', ServerUrl.UPLOAD, onLoad, onError).send(data);
+    createXhr('POST', ServerUrl.SET, onLoad, onError).send(data);
   };
 
 
