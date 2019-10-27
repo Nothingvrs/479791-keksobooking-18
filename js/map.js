@@ -137,6 +137,7 @@
   window.map.defaultPinCoordinates = PinCircleCoordinate;
   window.map.parent = map;
   window.map.deactivate = initPage;
+  window.map.cardRemove = removeMapCard;
 
 })();
 
