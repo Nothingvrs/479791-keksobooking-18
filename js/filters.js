@@ -30,7 +30,7 @@
     }
   };
 
-  var filteredType = function (value) {
+  var filteredByType = function (value) {
     if (value === 'any') {
       filteredPins = window.map.pins;
     } else {
@@ -40,7 +40,7 @@
     }
   };
 
-  var filteredPrice = function (value) {
+  var filteredByPrice = function (value) {
     var filteringPrice = PriceRange[value.toUpperCase()];
     if (value !== 'any') {
       filteredPins = filteredPins.filter(function (pin) {
@@ -49,23 +49,23 @@
     }
   };
 
-  var filteredRooms = function (value) {
+  var filteredByRooms = function (value) {
     if (value !== 'any') {
       filteredPins = filteredPins.filter(function (pin) {
-        return pin.offer.rooms === 'value';
+        return pin.offer.rooms === Number(value);
       });
     }
   };
 
-  var filteredQuests = function (value) {
+  var filteredByGuests = function (value) {
     if (value !== 'any') {
       filteredPins = filteredPins.filter(function (pin) {
-        return pin.offer.guests === value;
+        return pin.offer.guests === Number(value);
       });
     }
   };
 
-  var filteredFeatures = function () {
+  var filteredByFeatures = function () {
     var checkedFeatures = filterFeatures.querySelectorAll('input:checked');
     filteredPins = filteredPins.filter(function (pin) {
       return Array.from(checkedFeatures).every(function (element) {
@@ -77,11 +77,11 @@
   filters.addEventListener('change', function () {
     cleanMap();
     window.map.cardRemove();
-    filteredType(filterType.value);
-    filteredPrice(filterPrice.value);
-    filteredRooms(filterRooms.value);
-    filteredQuests(filterGuests.value);
-    filteredFeatures();
+    filteredByType(filterType.value);
+    filteredByPrice(filterPrice.value);
+    filteredByRooms(filterRooms.value);
+    filteredByGuests(filterGuests.value);
+    filteredByFeatures();
     window.pin.renderPins(filteredPins);
   });
 })();
