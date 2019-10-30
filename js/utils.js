@@ -9,14 +9,23 @@
     }
   };
 
-  var isEnterEvent = function (evt, action) {
-    var ENTER_KEYCODE = 13;
-    if (evt.keyCode === ENTER_KEYCODE) {
-      action(evt);
-    }
+  var DEBOUNCE_INTERVAL = 500; // ms
+
+  var debounce = function (cb) {
+    var lastTimeout = null;
+
+    return function () {
+      var parameters = arguments;
+      if (lastTimeout) {
+        window.clearTimeout(lastTimeout);
+      }
+      lastTimeout = window.setTimeout(function () {
+        cb.apply(null, parameters);
+      }, DEBOUNCE_INTERVAL);
+    };
   };
 
   window.utils = {};
-  window.utils.isEnterEvent = isEnterEvent;
   window.utils.onEscDown = onEscDown;
+  window.utils.debounce = debounce;
 })();

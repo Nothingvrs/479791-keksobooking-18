@@ -57,11 +57,19 @@
     mainPin.style.left = DEFAULT_MAIN_PIN_X - PinSize.WIDTH / 2 + 'px';
     window.form.setAddressCoordinates(PinCircleCoordinate);
     activePage = false;
+    window.filter.deactivate();
+    window.form.deactivate();
   };
 
   var initPage = function () {
     deactivateMap();
     mainPin.addEventListener('mousedown', onMainPinMouseDown);
+    mainPin.addEventListener('keydown', function (evt) {
+      var ENTER_KEYCODE = 13;
+      if (evt.keyCode === ENTER_KEYCODE) {
+        activateMap();
+      }
+    });
   };
 
   var initPins = function (data) {
@@ -75,6 +83,7 @@
     window.form.activateForm();
     window.form.setAddressCoordinates(DefaultMainPinCoordinates);
     window.backend.get(initPins, window.backend.mistaken);
+    window.filter.activate();
   };
 
   var onMainPinMouseDown = function (evt) {

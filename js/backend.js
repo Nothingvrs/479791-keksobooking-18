@@ -15,7 +15,7 @@
       if (xhr.status === 200) {
         onLoad(xhr.response);
       } else {
-        onError('Статус ответа: ' + xhr.status + ' ' + xhr.statusText);
+        onError('Статус ответа: ' + xhr.status);
       }
     });
     xhr.addEventListener('error', function () {
@@ -49,11 +49,23 @@
     var errorButton = error.querySelector('.error__button');
     message.innerHTML = errorMessage;
     document.body.insertAdjacentElement('afterbegin', errorBody);
-    errorButton.addEventListener('click', function () {
+
+    var closeError = function () {
       errorBody.remove();
+      window.map.deactivate();
       window.form.ads.classList.add('ad-form--disabled');
       window.map.parent.classList.add('map--faded');
-    });
+      errorButton.removeEventListener('click', closeError);
+      document.removeEventListener('click', closeError);
+      document.removeEventListener('keydown', onErrorEscDown);
+    };
+
+    var onErrorEscDown = function (evt) {
+      window.utils.onEscDown(evt, closeError);
+    };
+    document.addEventListener('keydown', onErrorEscDown);
+    document.addEventListener('click', closeError);
+    errorButton.addEventListener('click', closeError);
   };
 
   window.backend = {};

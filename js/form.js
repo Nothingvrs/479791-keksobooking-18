@@ -14,6 +14,8 @@
   var roomsInput = adForm.querySelector('[name = rooms');
   var priceInput = adForm.querySelector('#price');
   var addressInput = document.querySelector('[name = address]');
+  var timeInInput = adForm.querySelector('[name = timein]');
+  var timeOutInput = adForm.querySelector('[name = timeout]');
   var typeInput = adForm.querySelector('#type');
   var submit = adForm.querySelector('.ad-form__submit');
   var resetBtn = document.querySelector('.ad-form__reset');
@@ -50,13 +52,19 @@
       window.form.ads.classList.add('ad-form--disabled');
       window.map.parent.classList.add('map--faded');
       document.removeEventListener('click', onSuccessRemove);
+      document.removeEventListener('keydown', onEscSuccessRemove);
     };
+
+    var onEscSuccessRemove = function (evt) {
+      window.utils.onEscDown(evt, onSuccessRemove);
+    };
+
+    document.addEventListener('keydown', onEscSuccessRemove);
     document.addEventListener('click', onSuccessRemove);
   };
 
   var onSubmitSuccess = function () {
     showSuccess();
-    deactivateForm();
     window.map.deactivate();
   };
 
@@ -78,10 +86,21 @@
     evt.preventDefault();
     deactivateForm();
     window.map.deactivate();
+    window.loadImage.remove();
+  };
+
+  var onTimeInChange = function () {
+    timeOutInput.value = timeInInput.value;
+  };
+
+  var onTimeOutChange = function () {
+    timeInInput.value = timeOutInput.value;
   };
 
   var addFormListeners = function () {
     typeInput.addEventListener('change', onTypeInputChange);
+    timeInInput.addEventListener('change', onTimeInChange);
+    timeOutInput.addEventListener('change', onTimeOutChange);
     submit.addEventListener('click', onSubmitBtnClick);
     adForm.addEventListener('submit', onAdFormSubmit);
     resetBtn.addEventListener('click', onResetBtnClick);
@@ -89,6 +108,8 @@
 
   var removeFormListeners = function () {
     typeInput.removeEventListener('change', onTypeInputChange);
+    timeInInput.removeEventListener('change', onTimeInChange);
+    timeOutInput.removeEventListener('change', onTimeOutChange);
     submit.removeEventListener('click', onSubmitBtnClick);
     adForm.removeEventListener('submit', onAdFormSubmit);
     resetBtn.removeEventListener('click', onResetBtnClick);
@@ -99,8 +120,10 @@
     fieldsets.forEach(function (it) {
       it.disabled = false;
     });
+    addressInput.disabled = true;
     adFormHeader.disabled = false;
     addFormListeners();
+    window.loadImage.activate();
   };
 
   var deactivateForm = function () {
@@ -111,6 +134,8 @@
     adFormHeader.disabled = true;
     adForm.classList.add('ad-form--disabled');
     removeFormListeners();
+    window.loadImage.deactivate();
+    window.loadImage.remove();
   };
 
   deactivateForm();
@@ -118,5 +143,6 @@
   window.form = {};
   window.form.ads = adForm;
   window.form.activateForm = activateForm;
+  window.form.deactivate = deactivateForm;
   window.form.setAddressCoordinates = setAddressCoordinates;
 })();
