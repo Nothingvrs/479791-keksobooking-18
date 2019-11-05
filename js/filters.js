@@ -17,7 +17,6 @@
 
   var filters = document.querySelector('.map__filters');
   var filterItems = filters.querySelectorAll('select, input');
-  var selectFilterItems = filters.querySelectorAll('select');
   var filterType = filters.querySelector('#housing-type');
   var filterPrice = filters.querySelector('#housing-price');
   var filterRooms = filters.querySelector('#housing-rooms');
@@ -87,21 +86,11 @@
     window.utils.debounce(window.pin.renderPins(filteredPins));
   };
 
-  var resetFilter = function () {
-    selectFilterItems.forEach(function (it) {
-      it.value = 'any';
-    });
-    var featuresItems = filterFeatures.querySelectorAll('input');
-    featuresItems.forEach(function (feature) {
-      feature.checked = false;
-    });
-  };
-
   var deactivateFilter = function () {
     filterItems.forEach(function (it) {
       it.disabled = true;
     });
-    resetFilter();
+    filters.reset();
     filters.removeEventListener('change', onFilterChange);
   };
 

@@ -15,7 +15,7 @@
       if (xhr.status === 200) {
         onLoad(xhr.response);
       } else {
-        onError('Статус ответа: ' + xhr.status);
+        onError('Статус ответа: ' + xhr.status + '. Пожалуйста, перезагрузите страницу.');
       }
     });
     xhr.addEventListener('error', function () {

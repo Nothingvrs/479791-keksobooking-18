@@ -68,14 +68,10 @@
     window.map.deactivate();
   };
 
-  var onSubmitError = function () {
-    window.backend.mistaken();
-  };
-
   var onAdFormSubmit = function (evt) {
     evt.preventDefault();
     var formData = new FormData(adForm);
-    window.backend.set(onSubmitSuccess, onSubmitError, formData);
+    window.backend.set(onSubmitSuccess, window.backend.mistaken, formData);
   };
 
   var onSubmitBtnClick = function () {
@@ -120,7 +116,6 @@
     fieldsets.forEach(function (it) {
       it.disabled = false;
     });
-    addressInput.disabled = true;
     adFormHeader.disabled = false;
     addFormListeners();
     window.loadImage.activate();
