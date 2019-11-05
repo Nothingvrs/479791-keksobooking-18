@@ -85,18 +85,18 @@
     window.loadImage.remove();
   };
 
-  var onTimeInInputChange = function (evt) {
-    timeOutInput.value = evt.target.value;
-  };
-
-  var onTimeOutInputChange = function (evt) {
-    timeInInput.value = evt.target.value;
+  var timeInOutChange = function (select1, select2) {
+    select1.value = select2.value;
   };
 
   var addFormListeners = function () {
     typeInput.addEventListener('change', onTypeInputChange);
-    timeInInput.addEventListener('change', onTimeInInputChange);
-    timeOutInput.addEventListener('change', onTimeOutInputChange);
+    timeInInput.addEventListener('change', function () {
+      timeInOutChange(timeOutInput, timeInInput);
+    });
+    timeOutInput.addEventListener('change', function () {
+      timeInOutChange(timeInInput, timeOutInput);
+    });
     submit.addEventListener('click', onSubmitBtnClick);
     adForm.addEventListener('submit', onAdFormSubmit);
     resetBtn.addEventListener('click', onResetBtnClick);
@@ -104,8 +104,6 @@
 
   var removeFormListeners = function () {
     typeInput.removeEventListener('change', onTypeInputChange);
-    timeInInput.removeEventListener('change', onTimeInInputChange);
-    timeOutInput.removeEventListener('change', onTimeOutInputChange);
     submit.removeEventListener('click', onSubmitBtnClick);
     adForm.removeEventListener('submit', onAdFormSubmit);
     resetBtn.removeEventListener('click', onResetBtnClick);
