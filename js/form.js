@@ -85,17 +85,17 @@
     window.loadImage.remove();
   };
 
-  var timeInOutChange = function (select1, select2) {
-    select1.value = select2.value;
+  var onSynchronizeTimes = function (time1, time2) {
+    time1.value = time2.value;
   };
 
   var addFormListeners = function () {
     typeInput.addEventListener('change', onTypeInputChange);
     timeInInput.addEventListener('change', function () {
-      timeInOutChange(timeOutInput, timeInInput);
+      onSynchronizeTimes(timeOutInput, timeInInput);
     });
     timeOutInput.addEventListener('change', function () {
-      timeInOutChange(timeInInput, timeOutInput);
+      onSynchronizeTimes(timeInInput, timeOutInput);
     });
     submit.addEventListener('click', onSubmitBtnClick);
     adForm.addEventListener('submit', onAdFormSubmit);
