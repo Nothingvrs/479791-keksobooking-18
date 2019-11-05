@@ -85,14 +85,18 @@
     window.loadImage.remove();
   };
 
+  var onTimeInInputChange = function (evt) {
+    timeOutInput.value = evt.target.value;
+  };
+
+  var onTimeOutInputChange = function (evt) {
+    timeInInput.value = evt.target.value;
+  };
+
   var addFormListeners = function () {
     typeInput.addEventListener('change', onTypeInputChange);
-    timeInInput.addEventListener('change', function () {
-      timeOutInput.value = timeInInput.value;
-    });
-    timeOutInput.addEventListener('change', function () {
-      timeInInput.value = timeOutInput.value;
-    });
+    timeInInput.addEventListener('change', onTimeInInputChange);
+    timeOutInput.addEventListener('change', onTimeOutInputChange);
     submit.addEventListener('click', onSubmitBtnClick);
     adForm.addEventListener('submit', onAdFormSubmit);
     resetBtn.addEventListener('click', onResetBtnClick);
@@ -100,6 +104,8 @@
 
   var removeFormListeners = function () {
     typeInput.removeEventListener('change', onTypeInputChange);
+    timeInInput.removeEventListener('change', onTimeInInputChange);
+    timeOutInput.removeEventListener('change', onTimeOutInputChange);
     submit.removeEventListener('click', onSubmitBtnClick);
     adForm.removeEventListener('submit', onAdFormSubmit);
     resetBtn.removeEventListener('click', onResetBtnClick);
