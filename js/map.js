@@ -1,7 +1,7 @@
 'use strict';
 (function () {
   var TAIL_HEIGHT = 16;
-  var DEFAULT_MAIN_PIN_X = 600;
+  var DEFAULT_MAIN_PIN_X = 570;
   var DEFAULT_MAIN_PIN_Y = 375;
   var activePage = false;
 
@@ -29,8 +29,8 @@
   var pinTailCoordinates = DefaultMainPinCoordinates;
 
   var PinCircleCoordinate = {
-    y: DEFAULT_MAIN_PIN_Y - Math.floor(PinSize.HEIGHT / 2),
-    x: DEFAULT_MAIN_PIN_X - Math.floor(PinSize.HEIGHT / 2)
+    y: DEFAULT_MAIN_PIN_Y + Math.floor(PinSize.HEIGHT / 2),
+    x: DEFAULT_MAIN_PIN_X + Math.floor(PinSize.HEIGHT / 2)
   };
 
   var map = document.querySelector('.map');
