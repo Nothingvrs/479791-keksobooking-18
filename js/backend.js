@@ -41,25 +41,6 @@
     createXhr('POST', ServerUrl.SET, onLoad, onError).send(data);
   };
 
-  var closeError = function (error) {
-    error.remove();
-    window.map.deactivate();
-    window.form.ads.classList.add('ad-form--disabled');
-    window.map.parent.classList.add('map--faded');
-
-    errorButton.removeEventListener('click', onErrorButtonDown);
-    document.removeEventListener('click', closeError);
-    document.removeEventListener('keydown', onErrorEscDown);
-  };
-
-  var onErrorEscDown = function (evt) {
-    window.utils.onEscDown(evt, closeError);
-  };
-
-  var onErrorButtonDown = function () {
-    closeError(errorBody);
-  };
-
   var onError = function (errorMessage) {
     var errorTemplate = document.querySelector('#error')
       .content;
@@ -71,8 +52,31 @@
     document.body.insertAdjacentElement('afterbegin', errorBody);
 
     document.addEventListener('keydown', onErrorEscDown);
-    document.addEventListener('click', closeError);
+    document.addEventListener('click', onErrorOverlayDown);
     errorButton.addEventListener('click', onErrorButtonDown);
+  };
+
+  var closeError = function (error) {
+    error.remove();
+    window.map.deactivate();
+    window.form.ads.classList.add('ad-form--disabled');
+    window.map.parent.classList.add('map--faded');
+
+    errorButton.removeEventListener('click', onErrorButtonDown);
+    document.removeEventListener('click', onErrorOverlayDown);
+    document.removeEventListener('keydown', onErrorEscDown);
+  };
+
+  var onErrorOverlayDown = function () {
+    closeError(errorBody);
+  };
+
+  var onErrorEscDown = function (evt) {
+    window.utils.onEscDown(evt, onErrorButtonDown);
+  };
+
+  var onErrorButtonDown = function () {
+    closeError(errorBody);
   };
 
   window.backend = {};
