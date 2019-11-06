@@ -55,10 +55,10 @@
     removeMapCard();
     mainPin.style.top = DEFAULT_MAIN_PIN_Y - PinSize.HEIGHT / 2 + 'px';
     mainPin.style.left = DEFAULT_MAIN_PIN_X - PinSize.WIDTH / 2 + 'px';
-    window.form.setAddressCoordinates(PinCircleCoordinate);
     activePage = false;
     window.filter.deactivate();
     window.form.deactivate();
+    window.form.setAddressCoordinates(PinCircleCoordinate);
   };
 
   var initPage = function () {
