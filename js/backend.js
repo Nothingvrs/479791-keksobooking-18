@@ -1,6 +1,8 @@
 'use strict';
 
 (function () {
+  var errorButton;
+  var errorBody;
 
   var ServerUrl = {
     GET: 'https://js.dump.academy/keksobooking/data',
@@ -44,31 +46,29 @@
     window.map.deactivate();
     window.form.ads.classList.add('ad-form--disabled');
     window.map.parent.classList.add('map--faded');
+
+    errorButton.removeEventListener('click', onErrorButtonDown);
+    document.removeEventListener('click', closeError);
+    document.removeEventListener('keydown', onErrorEscDown);
+  };
+
+  var onErrorEscDown = function (evt) {
+    window.utils.onEscDown(evt, closeError);
+  };
+
+  var onErrorButtonDown = function () {
+    closeError(errorBody);
   };
 
   var onError = function (errorMessage) {
     var errorTemplate = document.querySelector('#error')
       .content;
     var error = errorTemplate.cloneNode(true);
-    var errorBody = error.querySelector('.error');
+    errorBody = error.querySelector('.error');
     var message = error.querySelector('.error__message');
-    var errorButton = error.querySelector('.error__button');
+    errorButton = error.querySelector('.error__button');
     message.innerHTML = errorMessage;
     document.body.insertAdjacentElement('afterbegin', errorBody);
-
-    var onErrorEscDown = function (evt) {
-      window.utils.onEscDown(evt, closeError);
-      errorButton.removeEventListener('click', onErrorButtonDown);
-      document.removeEventListener('click', closeError);
-      document.removeEventListener('keydown', onErrorEscDown);
-    };
-
-    var onErrorButtonDown = function () {
-      closeError(errorBody);
-      errorButton.removeEventListener('click', onErrorButtonDown);
-      document.removeEventListener('click', closeError);
-      document.removeEventListener('keydown', onErrorEscDown);
-    };
 
     document.addEventListener('keydown', onErrorEscDown);
     document.addEventListener('click', closeError);
