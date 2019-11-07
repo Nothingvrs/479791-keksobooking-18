@@ -26,10 +26,11 @@
 
   var cleanMap = function () {
     var pinsOnMap = document.querySelectorAll('.map__pin');
-    for (var i = 1; i < pinsOnMap.length; i++) {
-      window.pin.mapOverlay.removeChild(pinsOnMap[i]);
-    }
+    pinsOnMap.forEach(function (item) {
+      window.pin.mapOverlay.removeChild(item);
+    });
   };
+
 
   var filteredByType = function (value) {
     if (value === 'any') {
