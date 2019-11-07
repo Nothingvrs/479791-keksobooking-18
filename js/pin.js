@@ -28,10 +28,11 @@
   var renderPins = function (pinsData) {
     var fragment = document.createDocumentFragment();
     window.pin.slicedPinsData = pinsData.slice(0, MAX_PIN_COUNT);
+    window.pin.slicedPinsData = window.pin.slicedPinsData.filter(function (item) {
+      return (item.offer);
+    });
     window.pin.slicedPinsData.forEach(function (item) {
-      if (item.offer) {
-        fragment.appendChild(renderMapPin(item));
-      }
+      fragment.appendChild(renderMapPin(item));
     });
     mapOverlay.appendChild(fragment);
   };
