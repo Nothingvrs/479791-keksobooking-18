@@ -3,6 +3,7 @@
   var TAIL_HEIGHT = 16;
   var DEFAULT_MAIN_PIN_X = 570;
   var DEFAULT_MAIN_PIN_Y = 375;
+  var ENTER_KEYCODE = 13;
   var activePage = false;
 
   var PinSize = {
@@ -65,7 +66,6 @@
     deactivateMap();
     mainPin.addEventListener('mousedown', onMainPinMouseDown);
     mainPin.addEventListener('keydown', function (evt) {
-      var ENTER_KEYCODE = 13;
       if (evt.keyCode === ENTER_KEYCODE) {
         activateMap();
       }

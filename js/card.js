@@ -60,6 +60,7 @@
     cardAvatar.src = cardData.author.avatar;
     getCardPhotos(cardPhotos, cardData.offer.photos);
     var closeCardBtn = card.querySelector('.popup__close');
+    closeCardBtn.tabIndex = 0;
 
     var closeCard = function () {
       cardBody.remove();

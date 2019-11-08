@@ -1,7 +1,7 @@
 'use strict';
 (function () {
-  var mapOverlay = document.querySelector('.map__pins');
   var MAX_PIN_COUNT = 5;
+  var mapOverlay = document.querySelector('.map__pins');
 
   var renderMapPin = function (pinData) {
     var pinTemplate = document.querySelector('#pin')

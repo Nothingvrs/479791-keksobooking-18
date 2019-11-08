@@ -1,5 +1,8 @@
 'use strict';
 (function () {
+  var ROOMS_MAX = '100';
+  var CAPACITY_MIN = '0';
+
   var BuildingMinPrice = {
     BUNGALO: 0,
     FLAT: 1000,
@@ -32,11 +35,11 @@
 
   var validateRooms = function () {
     capacityInput.setCustomValidity('');
-    if (roomsInput.value < capacityInput.value && capacityInput.value > '0' && roomsInput.value !== '100') {
+    if (roomsInput.value < capacityInput.value && capacityInput.value > CAPACITY_MIN && roomsInput.value !== ROOMS_MAX) {
       capacityInput.setCustomValidity('Вам нужна квартира побольше');
-    } else if (roomsInput.value === '100' && capacityInput.value > '0') {
+    } else if (roomsInput.value === ROOMS_MAX && capacityInput.value > CAPACITY_MIN) {
       capacityInput.setCustomValidity('Эти аппартаменты не для гостей');
-    } else if (roomsInput.value !== '100' && capacityInput.value === '0') {
+    } else if (roomsInput.value !== ROOMS_MAX && capacityInput.value === CAPACITY_MIN) {
       capacityInput.setCustomValidity('Выберите аппартаменты не для гостей');
     }
   };

@@ -1,15 +1,14 @@
 'use strict';
 
 (function () {
+  var DEBOUNCE_INTERVAL = 500; // ms
+  var ESC_KEYCODE = 27;
 
   var onEscDown = function (evt, action) {
-    var ESC_KEYCODE = 27;
     if (evt.keyCode === ESC_KEYCODE) {
       action();
     }
   };
-
-  var DEBOUNCE_INTERVAL = 500; // ms
 
   var debounce = function (cb) {
     var lastTimeout = null;

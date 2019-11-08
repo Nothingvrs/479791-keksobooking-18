@@ -1,20 +1,23 @@
 'use strict';
 
 (function () {
-  var errorButton;
-  var errorBody;
+  var TIMEOUT = 10000;
+  var STATUS_OK = 200;
 
   var ServerUrl = {
     GET: 'https://js.dump.academy/keksobooking/data',
     SET: 'https://js.dump.academy/keksobooking'
   };
+  var errorButton;
+  var errorBody;
 
   var createXhr = function (method, url, onLoad, onError) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
+    xhr.timeout = TIMEOUT;
 
     xhr.addEventListener('load', function () {
-      if (xhr.status === 200) {
+      if (xhr.status === STATUS_OK) {
         onLoad(xhr.response);
       } else {
         onError('Статус ответа: ' + xhr.status + '. Пожалуйста, перезагрузите страницу.');
@@ -26,8 +29,6 @@
     xhr.addEventListener('timeout', function () {
       onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
     });
-
-    xhr.timeout = 10000; // 10s
 
     xhr.open(method, url);
     return xhr;
@@ -48,7 +49,7 @@
     errorBody = error.querySelector('.error');
     var message = error.querySelector('.error__message');
     errorButton = error.querySelector('.error__button');
-    message.innerHTML = errorMessage;
+    message.textContent = errorMessage;
     document.body.insertAdjacentElement('afterbegin', errorBody);
 
     document.addEventListener('keydown', onErrorEscDown);
